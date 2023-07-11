@@ -14,6 +14,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $primaryKey = 'id';
+    protected $keyType = 'string';
+    public $incrementing = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -73,6 +77,154 @@ class User extends Authenticatable
         return $return;
     }
 
+    static public function getParent()
+    {
+        $return = self::select('users.*')
+            ->where('user_type', '=', 4)
+            ->where('is_delete', '=', 0);
+        if (!empty(Request::get('name'))) {
+            $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
+        }
+
+        if (!empty(Request::get('last_name'))) {
+            $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name') . '%');
+        }
+        if (!empty(Request::get('mobile_number'))) {
+            $return = $return->where('users.mobile_number', 'like', '%' . Request::get('mobile_number') . '%');
+        }
+
+        if (!empty(Request::get('gender'))) {
+            $return = $return->where('users.gender', '=', Request::get('gender'));
+        }
+        if (!empty(Request::get('occupation'))) {
+            $return = $return->where('users.occupation', 'like', '%' . Request::get('occupation') . '%');
+        }
+        if (!empty(Request::get('address'))) {
+            $return = $return->where('users.address', 'like', '%' . Request::get('address') . '%');
+        }
+
+        if (!empty(Request::get('status'))) {
+            $status = (Request::get('status') == 100) ? 0 : 1;
+            $return = $return->where('users.status', '=', $status);
+        }
+        if (!empty(Request::get('email'))) {
+            $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
+        }
+        if (!empty(Request::get('date'))) {
+            $return = $return->whereDate('users.created_at', '=', Request::get('date'));
+        }
+        $return = $return->orderBy('created_at', 'DESC')
+            ->paginate(5);
+        return $return;
+    }
+
+    static public function getStudent()
+    {
+        $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
+            ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
+            ->join('class', 'class.id', '=', 'users.class_id', 'left')
+            ->where('users.user_type', '=', 3)
+            ->where('users.is_delete', '=', 0);
+
+        if (!empty(Request::get('name'))) {
+            $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
+        }
+
+        if (!empty(Request::get('middle_name'))) {
+            $return = $return->where('users.middle_name', 'like', '%' . Request::get('middle_name') . '%');
+        }
+        if (!empty(Request::get('last_name'))) {
+            $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name') . '%');
+        }
+
+        if (!empty(Request::get('class'))) {
+            $return = $return->where('class.name', 'like', '%' . Request::get('class') . '%');
+        }
+        if (!empty(Request::get('gender'))) {
+            $return = $return->where('users.gender', 'like', '%' . Request::get('gender') . '%');
+        }
+
+        if (!empty(Request::get('status'))) {
+            $status = (Request::get('status') == 100) ? 0 : 1;
+            $return = $return->where('users.status', '=', $status);
+        }
+        if (!empty(Request::get('date'))) {
+            $return = $return->whereDate('users.created_at', '=', Request::get('date'));
+        }
+        $return = $return->orderBy('users.id', 'desc')
+            ->paginate();
+
+        return $return;
+    }
+
+    static function getSearchStudent()
+    {
+        if (!empty(Request::get('id')) || !empty(Request::get('name')) ||  !empty(Request::get('middle_name')) || !empty(Request::get('last_name')) || !empty(Request::get('email'))) {
+
+            $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
+                ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
+                ->join('class', 'class.id', '=', 'users.class_id', 'left')
+                ->where('users.user_type', '=', 3)
+                ->where('users.is_delete', '=', 0);
+
+            if (!empty(Request::get('id'))) {
+                $return = $return->where('users.id', '=', Request::get('id'));
+            }
+
+            if (!empty(Request::get('name'))) {
+                $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
+            }
+
+            if (!empty(Request::get('middle_name'))) {
+                $return = $return->where('users.middle_name', 'like', '%' . Request::get('middle_name') . '%');
+            }
+            if (!empty(Request::get('last_name'))) {
+                $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name') . '%');
+            }
+
+            if (!empty(Request::get('email'))) {
+                $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
+            }
+
+            if (!empty(Request::get('class'))) {
+                $return = $return->where('class.name', 'like', '%' . Request::get('class') . '%');
+            }
+            if (!empty(Request::get('gender'))) {
+                $return = $return->where('users.gender', '=', Request::get('gender'));
+            }
+
+            if (!empty(Request::get('status'))) {
+                $status = (Request::get('status') == 100) ? 0 : 1;
+                $return = $return->where('users.status', '=', $status);
+            }
+
+            $return = $return->orderBy('users.id', 'desc')
+                ->limit(50)
+                ->get();
+
+            return $return;
+        }
+    }
+
+    static function getMyStudent($parent_id)
+    {
+        $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
+            ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
+            ->join('class', 'class.id', '=', 'users.class_id', 'left')
+            ->where('users.user_type', '=', 3)
+            ->where('users.parent_id', '=', $parent_id)
+            ->where('users.is_delete', '=', 0)
+            ->orderBy('users.id', 'desc')
+            ->get();
+
+        return $return;
+    }
+
+
+
+
+
+
     static public function getEmailSingle($email)
     {
         return User::where('email', '=', $email)->first();
@@ -81,5 +233,14 @@ class User extends Authenticatable
     static public function getTokenSingle($remember_token)
     {
         return User::where('remember_token', '=', $remember_token)->first();
+    }
+
+    public function getProfile()
+    {
+        if (!empty($this->profile_pic) && file_exists('public/upload/profile/' . $this->profile_pic)) {
+            return url('public/upload/profile/' . $this->profile_pic);
+        } else {
+            return "";
+        }
     }
 }

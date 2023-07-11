@@ -67,16 +67,19 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>#</th>
+                      <th>S/N</th>
+                      <th>id</th>
                       <th>Name</th>
                       <th>Email</th>
                       <th>Created Date</th>
                        <th>Action</th>
                     </tr>
                   </thead>
+                   @php($i = 1)
                   <tbody>
                     @foreach($getRecord as $value)
                     <tr>
+                        <td>{{$i++}}</td>
                         <td>{{$value->id}}</td>
                         <td>{{$value->name}}</td>
                         <td>{{$value->email}}</td>

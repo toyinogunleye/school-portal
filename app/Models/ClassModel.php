@@ -56,24 +56,6 @@ class ClassModel extends Model
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // CREATE TABLE users (
 //   id CHAR(36) NOT NULL DEFAULT (UUID()),
 //   name VARCHAR(255),
