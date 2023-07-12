@@ -203,7 +203,9 @@
 
                           <div class="form-group col-sm-6">
                               <label>Password <span style="color: red">*</span></label>
-                              <input type="text" class="form-control" value="{{old('password')}}" name="password" required placeholder="Enter Password">
+                              <input type="text" class="form-control" value="{{old('password')}}" name="password"  placeholder="Enter Password">
+                              <div style="color: red">{{$errors->first('password')}}</div>
+                              <p>Add a new password in case you want to change password</p>
                           </div>
                         </div>
                       </div>

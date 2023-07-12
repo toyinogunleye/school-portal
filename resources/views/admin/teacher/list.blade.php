@@ -154,7 +154,7 @@
                         <td>{{date('d-m-Y H:i A', strtotime($value->created_at))}}</td>
                         <td class=>
 
-                                {{-- <a href="{{url('admin/student/view-student/'.$value->id)}}" class="btn btn-info"><i class="fas fa-eye"></i></a> --}}
+                                <a href="{{url('admin/teacher/view-teacher/'.$value->id)}}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
                                 <a href="{{url('admin/teacher/edit-teacher/'.$value->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></a>
                                 <a href="{{url('admin/teacher/delete-teacher/'.$value->id)}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                  {{-- <a href="{{url('admin/teacher/my-student/'.$value->id)}}" class="btn btn-primary btn-sm">My Student</i></a> --}}

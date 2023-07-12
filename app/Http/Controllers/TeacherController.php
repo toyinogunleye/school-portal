@@ -92,4 +92,93 @@ class TeacherController extends Controller
             return view('404');
         }
     }
+
+    public function updateTeacher($id, Request $request)
+    {
+        request()->validate([
+            'email' => 'required|email|unique:users,email,' . $id,
+            // 'password' => 'min:5',
+            'mobile_number' => 'max:15|min:8'
+
+        ]);
+
+        $teacher = User::getSingle($id);
+        $teacher->name = trim($request->name);
+        $teacher->last_name = trim($request->last_name);
+        $teacher->middle_name = trim($request->middle_name);
+        $teacher->mobile_number = trim($request->mobile_number);
+        $teacher->guarantor_name = trim($request->guarantor_name);
+        $teacher->guarantor_number = trim($request->guarantor_number);
+
+        if (!empty($request->date_of_birth)) {
+            $teacher->date_of_birth = $request->date_of_birth;
+        }
+
+        $teacher->gender = trim($request->gender);
+        $teacher->marital_status = trim($request->marital_status);
+        $teacher->religion = trim($request->religion);
+        $teacher->address = trim($request->address);
+        $teacher->permanent_address = trim($request->permanent_address);
+        $teacher->nationality = trim($request->nationality);
+        $teacher->state_of_origin = trim($request->state_of_origin);
+        $teacher->city = trim($request->city);
+        $teacher->qualification = trim($request->qualification);
+        $teacher->work_experience = trim($request->work_experience);
+
+        if (!empty($request->employment_date)) {
+            $teacher->employment_date = $request->employment_date;
+        }
+        $teacher->note = trim($request->note);
+
+
+        if (!empty($request->file('profile_pic'))) {
+
+            if (!empty($teacher->getProfile())) {
+                unlink('public/upload/profile/' . $teacher->profile_pic);
+            }
+
+            $ext = $request->file('profile_pic')->getClientOriginalExtension();
+            $file = $request->file('profile_pic');
+            $randomStr = date('Ymdhis') . Str::random(20);
+            $filename = strtolower($randomStr) . '.' . $ext;
+            $file->move('public/upload/profile/',  $filename);
+            $teacher->profile_pic = $filename;
+        }
+
+        $teacher->status = trim($request->status);
+        $teacher->email = trim($request->email);
+        if (!empty($request->password)) {
+            request()->validate([
+                'password' => 'min:5',
+            ]);
+            $teacher->password = Hash::make($request->password);
+        }
+
+        $teacher->save();
+
+        return redirect('admin/teacher/list')->with('success', "Teacher successfully Updated");
+    }
+
+    public function deleteTeacher($id)
+    {
+        $getRecord = User::getSingle($id);
+        if (!empty($getRecord)) {
+            $getRecord->is_delete = 1;
+            $getRecord->save();
+            return redirect()->back()->with('success', "Teacher successfully Deleted");
+        } else {
+            abort(404);
+        }
+    }
+
+    public function viewTeacher($id)
+    {
+        $data['getRecord'] = User::getSingle($id);
+        if (!empty($data['getRecord'])) {
+            $data['header_title'] = 'View Teacher';
+            return view('admin.teacher.view-teacher', $data);
+        } else {
+            return view('404');
+        }
+    }
 }
