@@ -47,7 +47,7 @@
                          <div class="form-group col-sm-4">
                             <label>Date of Birth <span style="color: red">*</span></label>
                             <input type="date" class="form-control" value="{{old('date_of_birth')}}" name="date_of_birth" required>
-                             <div style="color: red">{{$errors->first('date_of_birth')}}</div>
+                            <div style="color: red">{{$errors->first('date_of_birth')}}</div>
                         </div>
                          <div class="form-group col-sm-4">
                             <label>Gender <span style="color: red">*</span></label>

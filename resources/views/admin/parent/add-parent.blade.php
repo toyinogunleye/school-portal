@@ -96,7 +96,7 @@
                          <div class="form-group col-sm-4">
                             <label>Address <span style="color: red">*</span></label>
                             {{-- <textarea class="form-control" value="{{old('caste')}}" name="caste" placeholder="Enter Caste" ></textarea> --}}
-                            <input type="text" class="form-control" value="{{old('address')}}" name="address" placeholder="Enter Caste">
+                            <input type="text" class="form-control" value="{{old('address')}}" name="address" placeholder="Enter Address">
                         </div>
 
                         <div class="form-group col-sm-4">

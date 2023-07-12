@@ -220,6 +220,53 @@ class User extends Authenticatable
         return $return;
     }
 
+    static function getTeacher()
+    {
+        $return = self::select('users.*')
+            ->where('user_type', '=', 2)
+            ->where('is_delete', '=', 0);
+        if (!empty(Request::get('name'))) {
+            $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
+        }
+
+        if (!empty(Request::get('last_name'))) {
+            $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name') . '%');
+        }
+        if (!empty(Request::get('mobile_number'))) {
+            $return = $return->where('users.mobile_number', 'like', '%' . Request::get('mobile_number') . '%');
+        }
+
+        if (!empty(Request::get('gender'))) {
+            $return = $return->where('users.gender', '=', Request::get('gender'));
+        }
+        if (!empty(Request::get('marital_status'))) {
+            $return = $return->where('users.marital_status', '=', Request::get('marital_status'));
+        }
+        if (!empty(Request::get('qualification'))) {
+            $return = $return->where('users.qualification', '=', Request::get('qualification'));
+        }
+        if (!empty(Request::get('work_experience'))) {
+            $return = $return->where('users.work_experience', 'like', '%' . Request::get('work_experience') . '%');
+        }
+        if (!empty(Request::get('address'))) {
+            $return = $return->where('users.address', 'like', '%' . Request::get('address') . '%');
+        }
+
+        if (!empty(Request::get('status'))) {
+            $status = (Request::get('status') == 100) ? 0 : 1;
+            $return = $return->where('users.status', '=', $status);
+        }
+        if (!empty(Request::get('email'))) {
+            $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
+        }
+        if (!empty(Request::get('employment_date'))) {
+            $return = $return->whereDate('users.employment_date', '=', Request::get('employment_date'));
+        }
+        $return = $return->orderBy('created_at', 'DESC')
+            ->paginate(20);
+        return $return;
+    }
+
 
 
 

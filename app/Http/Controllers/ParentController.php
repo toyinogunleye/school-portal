@@ -22,7 +22,7 @@ class ParentController extends Controller
 
     public function addParent()
     {
-        $data['getClassList'] = ClassModel::getClassList();
+
         $data['header_title'] = 'Add new Parent';
         return view('admin.parent.add-parent', $data);
     }
