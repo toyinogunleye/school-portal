@@ -192,7 +192,15 @@
             <a href="{{url('admin/class-subject/list')}}" class="nav-link @if(Request::segment(2) == 'class-subject') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-              Class-Subject
+              Assign Class-Subject
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('admin/assign-class-teacher/list')}}" class="nav-link @if(Request::segment(2) == 'assign-class-teacher') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+              Assign Class Teacher
               </p>
             </a>
           </li>
@@ -214,6 +222,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{url('teacher/my-account')}}" class="nav-link @if(Request::segment(2) == 'my-account') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+              My Profile
+              </p>
+            </a>
+          </li>
            <li class="nav-item">
             <a href="{{url('teacher/change-password')}}" class="nav-link @if(Request::segment(2) == 'change-password') active @endif">
               <i class="nav-icon far fa-user"></i>
@@ -228,7 +244,22 @@
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
-
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('student/my-account')}}" class="nav-link @if(Request::segment(2) == 'my-account') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+              My Profile
+              </p>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="{{url('student/my-subject')}}" class="nav-link @if(Request::segment(2) == 'my-subject') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+              My Stujects
               </p>
             </a>
           </li>
@@ -246,6 +277,22 @@
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('parent/my-account')}}" class="nav-link @if(Request::segment(2) == 'my-account') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+              My Profile
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('parent/my-student')}}" class="nav-link @if(Request::segment(2) == 'my-student') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+              My Student
               </p>
             </a>
           </li>

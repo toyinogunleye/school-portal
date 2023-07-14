@@ -115,13 +115,11 @@
                       <th>Email</th>
                       <th>Phone</th>
                       <th>Gender</th>
-                      <th>DOB</th>
+
                       <th>Marital Status</th>
                       <th>Qualification</th>
-                      <th>Work Experience</th>
                       <th>Employment Date</th>
-                      <th>Current Address</th>
-                      <th>Note</th>
+
                       <th>Status</th>
                       <th>Created Date</th>
                        <th>Action</th>
@@ -143,13 +141,13 @@
                         <td>{{$value->email}}</td>
                          <td>{{$value->mobile_number}}</td>
                         <td>{{$value->gender}}</td>
-                         <td>{{date('d-m-Y', strtotime($value->date_of_birth))}}</td>
+
                         <td>{{ $value->marital_status}}</td>
                         <td>{{$value->qualification}}</td>
-                        <td>{{$value->work_experience}}</td>
+                      >
                         <td>{{date('d-m-Y', strtotime($value->employment_date))}}</td>
-                        <td>{{$value->address}}</td>
-                        <td>{{$value->note}}</td>
+
+
                         <td> {{ ($value->status == 0) ? 'Active' : 'Inactive' }}</td>
                         <td>{{date('d-m-Y H:i A', strtotime($value->created_at))}}</td>
                         <td class=>

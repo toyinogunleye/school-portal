@@ -18,17 +18,17 @@ class StudentController extends Controller
         return view('admin.student.list', $data);
     }
 
-    public function viewStudent($id)
-    {
-        $data['getRecord'] = User::getSingle($id);
-        if (!empty($data['getRecord'])) {
-            $data['getClassList'] = ClassModel::getClassList();
-            $data['header_title'] = 'Edit Student';
-            return view('admin.student.view-student', $data);
-        } else {
-            return view('404');
-        }
-    }
+    // public function viewStudent($id)
+    // {
+    //     $data['getRecord'] = User::getSingle($id);
+    //     if (!empty($data['getRecord'])) {
+    //         $data['getClassList'] = ClassModel::getClassList();
+    //         $data['header_title'] = 'Edit Student';
+    //         return view('admin.student.view-student', $data);
+    //     } else {
+    //         return view('404');
+    //     }
+    // }
 
     public function addStudent()
     {

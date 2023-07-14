@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClassModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,11 +10,36 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
+    public function myAccount()
+    {
+        $data['getRecord'] = User::getSingle(Auth::user()->id);
+
+        $data['header_title'] = "My Account";
+        if (Auth::user()->user_type == 2) {
+            return view('teacher.my-account', $data);
+        } else if (Auth::user()->user_type == 3) {
+            return view('student.my-account', $data);
+        }
+    }
+
+    public function parentAccount()
+    {
+        $data['getRecord'] = User::getSingle(Auth::user()->id);
+        $data['header_title'] = "My Account";
+        return view('parent.my-account', $data);
+    }
+
+
+
     public function changePassword()
     {
         $data['header_title'] = "Change Password";
         return view('profile.change-password', $data);
     }
+
+
+
 
     public function updateChangePassword(Request $request)
     {
