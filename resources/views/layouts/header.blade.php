@@ -230,6 +230,25 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{url('teacher/my-student')}}" class="nav-link @if(Request::segment(2) == 'my-student') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+              My Students
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{url('teacher/my-class-subject')}}" class="nav-link @if(Request::segment(2) == 'my-class-subject') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+              My Class & Subject
+              </p>
+            </a>
+          </li>
+
            <li class="nav-item">
             <a href="{{url('teacher/change-password')}}" class="nav-link @if(Request::segment(2) == 'change-password') active @endif">
               <i class="nav-icon far fa-user"></i>
