@@ -9,7 +9,7 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>Assign Class Teacher List </h1>
-            {{-- (Total : {{$getRecord->total()}}) --}}
+           <p style="color: red;"> (Total : {{$getRecord->total()}})</p>
           </div>
           <div class="col-sm-6" style="text-align: right;">
               <a href="{{url('admin/assign-class-teacher/add')}}" class="btn btn-primary">Assign New Class Teacher</a>
@@ -33,26 +33,35 @@
             <form method="get" action="">
             <div class="card-body">
                 <div class="row">
-                  <div class="form-group col-md-3">
-                    {{-- <label>Class Name</label>
+                  <div class="form-group col-md-2">
+                    <label>Class Name</label>
                     <input type="text" class="form-control" value="{{Request::get('class_name')}}" name="class_name" placeholder="Class Name">
                   </div>
 
 
-                  <div class="form-group col-md-3">
-                    <label>Subject Name</label>
-                    <input type="text" class="form-control" value="{{Request::get('subject_name')}}" name="subject_name" placeholder="Subject Name">
+                  <div class="form-group col-md-2">
+                    <label>Teacher Name</label>
+                    <input type="text" class="form-control" value="{{Request::get('name')}}" name="name" placeholder="First Name">
                   </div>
 
-                  <div class="form-group col-md-3">
-                    <label>Date</label>
-                    <input type="date" class="form-control" value="{{Request::get('date')}}" name="date" placeholder="Enter email">
+                  <div class="form-group col-md-2">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" value="{{Request::get('last_name')}}" name="last_name" placeholder="Last Name">
                   </div>
-                  <div class="form-group col-md-3">
+                   <div class="form-group col-md-2">
+                        <label>Status</label>
+                        <select class="form-control" name="status">
+                            <option value="">Select Status</option>
+                            <option {{ (Request::get('status') == '100') ? 'selected': ''}} value="100">Active</option>
+                            <option {{ (Request::get('status') == '1') ? 'selected': ''}} value="1">Inactive</option>
+                        </select>
+                  </div>
+
+                  <div class="form-group col-md-2">
                     <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
-                    <a href="{{url('admin/class-subject/list')}}" class="btn btn-success" type="submit" style="margin-top: 30px;">Reset</a  >
+                    <a href="{{url('admin/assign-class-teacher/list')}}" class="btn btn-success" type="submit" style="margin-top: 30px;">Reset</a  >
                   </div>
-                </div> --}}
+                </div>
             </div>
             </form>
             </div>
@@ -86,7 +95,7 @@
                          <td>{{$i++}}</td>
                         <td>{{$value->id}}</td>
                         <td>{{$value->class_name}}</td>
-                         <td>{{$value->teacher_name}}</td>
+                         <td>{{$value->teacher_name}} {{$value->teacher_last_name}}</td>
                         <td>
                             @if($value->status == 0)
                             Active
@@ -97,12 +106,9 @@
                         <td>{{$value->created_by_name}}</td>
                         <td>{{date('d-m-Y H:i A', strtotime($value->created_at))}}</td>
                         <td>
-                            <a class="btn btn-info btn-sm" title="Edit" href="{{url('admin/class-subject/edit/'.$value->id)}}" ><i class="fas fa-pencil-alt"></i>Edit All </a>
-                            <a class="btn btn-primary btn-sm" title="Edit" href="{{url('admin/class-subject/edit-single/'.$value->id)}}" ><i class="fas fa-pencil-alt"></i> Edit Single</a>
-                            <a class="btn btn-danger btn-sm" title="Delete"  href="{{url('admin/class-subject/delete/'.$value->id)}}"><i class="fas fa-trash"> </i> Delete </a>
-
-                            {{-- <a href="{{url('admin/admin/edit/'.$value->id)}}" class="btn btn-primary">Edit</a>
-                             <a href="{{url('admin/admin/delete/'.$value->id)}}" class="btn btn-danger">Delete</a> --}}
+                            <a class="btn btn-info btn-sm" title="Edit" href="{{url('admin/assign-class-teacher/edit/'.$value->id)}}" ></i>Edit All </a>
+                            <a class="btn btn-primary btn-sm" title="Edit" href="{{url('admin/assign-class-teacher/edit-single/'.$value->id)}}" ></i> Edit Single</a>
+                            <a class="btn btn-danger btn-sm" title="Delete"  href="{{url('admin/assign-class-teacher/delete/'.$value->id)}}"> </i> Delete </a>
                         </td>
                     </tr>
                     @endforeach

@@ -111,8 +111,11 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/assign-class-teacher/list', [AssignClassTeacherController::class, 'assignClassTeacherList']);
     Route::get('/admin/assign-class-teacher/add', [AssignClassTeacherController::class, 'assignClassTeacher']);
     Route::post('/admin/assign-class-teacher/add', [AssignClassTeacherController::class, 'insertAssignClassTeacher']);
-    // Route::get('/admin/class-subject/edit/{id}', [ClassSubjectController::class, 'editClassSubject']);
-    // Route::post('/admin/class-subject/edit/{id}', [ClassSubjectController::class, 'updateClassSubject']);
+    Route::get('/admin/assign-class-teacher/edit/{id}', [AssignClassTeacherController::class, 'editAssignClassTeacher']);
+    Route::post('/admin/assign-class-teacher/edit/{id}', [AssignClassTeacherController::class, 'updateAssignClassTeacher']);
+    Route::get('/admin/assign-class-teacher/edit-single/{id}', [AssignClassTeacherController::class, 'editSingleAssignClassTeacher']);
+    Route::post('/admin/assign-class-teacher/edit-single/{id}', [AssignClassTeacherController::class, 'updateSingleAssignClassTeacher']);
+    Route::get('/admin/assign-class-teacher/delete/{id}', [AssignClassTeacherController::class, 'deleteAssignClassTeacher']);
 
     //change password
     Route::get('/admin/change-password', [UserController::class, 'changePassword']);

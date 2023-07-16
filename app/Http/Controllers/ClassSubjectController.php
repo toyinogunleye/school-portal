@@ -33,11 +33,11 @@ class ClassSubjectController extends Controller
         if (!empty($request->subject_id)) {
             foreach ($request->subject_id as $subject_id) {
 
-                $gettAlreadyFirst = ClassSubjectModel::getAlreadyFirst($request->class_id, $subject_id);
+                $getAlreadyFirst = ClassSubjectModel::getAlreadyFirst($request->class_id, $subject_id);
 
-                if (!empty($gettAlreadyFirst)) {
-                    $gettAlreadyFirst->status = $request->status;
-                    $gettAlreadyFirst->save();
+                if (!empty($getAlreadyFirst)) {
+                    $getAlreadyFirst->status = $request->status;
+                    $getAlreadyFirst->save();
                 } else {
                     $save = new ClassSubjectModel;
                     $save->id = Str::uuid()->toString();
@@ -78,11 +78,11 @@ class ClassSubjectController extends Controller
         if (!empty($request->subject_id)) {
             foreach ($request->subject_id as $subject_id) {
 
-                $gettAlreadyFirst = ClassSubjectModel::getAlreadyFirst($request->class_id, $subject_id);
+                $getAlreadyFirst = ClassSubjectModel::getAlreadyFirst($request->class_id, $subject_id);
 
-                if (!empty($gettAlreadyFirst)) {
-                    $gettAlreadyFirst->status = $request->status;
-                    $gettAlreadyFirst->save();
+                if (!empty($getAlreadyFirst)) {
+                    $getAlreadyFirst->status = $request->status;
+                    $getAlreadyFirst->save();
                 } else {
                     $save = new ClassSubjectModel;
                     $save->class_id = $request->class_id;
@@ -124,11 +124,11 @@ class ClassSubjectController extends Controller
     {
 
 
-        $gettAlreadyFirst = ClassSubjectModel::getAlreadyFirst($request->class_id, $request->subject_id);
+        $getAlreadyFirst = ClassSubjectModel::getAlreadyFirst($request->class_id, $request->subject_id);
 
-        if (!empty($gettAlreadyFirst)) {
-            $gettAlreadyFirst->status = $request->status;
-            $gettAlreadyFirst->save();
+        if (!empty($getAlreadyFirst)) {
+            $getAlreadyFirst->status = $request->status;
+            $getAlreadyFirst->save();
 
 
             return redirect('admin/class-subject/list')->with('success', "Subject Successfully Updated");

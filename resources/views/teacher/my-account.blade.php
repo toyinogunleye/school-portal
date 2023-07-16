@@ -11,7 +11,7 @@
             <h1>{{$getRecord->name}} {{$getRecord->middle_name}} {{$getRecord->last_name}}  </h1>
           </div>
           <div class="col-sm-6" style="text-align: right;">
-              <a href="{{url('admin/teacher/add-teacher')}}" class="btn btn-primary">Edit Teacher</a>
+              <a href="{{url('admin/teacher/add-teacher')}}" class="btn btn-primary">Edit Profile</a>
           </div>
         </div>
       </div><!-- /.container-fluid -->

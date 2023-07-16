@@ -57,7 +57,7 @@
                         </div>
                          <div class="form-group col-sm-4">
                             <label>Guarantor's Number <span style="color: red">*</span></label>
-                            <input type="number" class="form-control" value="{{old('guarantor_number"')}}" name="guarantor_number" required placeholder="Enter Guarantor Number">
+                            <input type="text" class="form-control" value="{{old('guarantor_number"')}}" name="guarantor_number" required placeholder="Enter Guarantor Number">
                              <div style="color: red">{{$errors->first('guarantor_number"')}}</div>
                         </div>
                     </div>
