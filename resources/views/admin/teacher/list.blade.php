@@ -32,23 +32,23 @@
             <form method="get" action="">
             <div class="card-body">
                 <div class="row">
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-3">
                     <label>Name</label>
                     <input type="text" class="form-control" value="{{Request::get('name')}}" name="name" placeholder="Name">
                   </div>
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-3">
                     <label>Last Name</label>
                     <input type="text" class="form-control" value="{{Request::get('last_name')}}" name="last_name" placeholder="last_name">
                   </div>
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-3">
                     <label>Phone</label>
                     <input type="text" class="form-control" value="{{Request::get('mobile_number')}}" name="mobile_number" placeholder="Phone Number">
                   </div>
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-3">
                     <label>Email</label>
                     <input type="text" class="form-control" value="{{Request::get('email')}}" name="email" placeholder="Enter email">
                   </div>
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-3">
                     <label>Gender</label>
                     <select class="form-control" name="gender">
                             <option value="">Select Gender</option>
@@ -57,23 +57,23 @@
                             <option {{ (Request::get('gender') == 'Others') ? 'selected': ''}} value="Others">Others</option>
                     </select>
                   </div>
-                   <div class="form-group col-md-2">
+                   <div class="form-group col-md-3">
                     <label>Qualification</label>
                     <input type="text" class="form-control" value="{{Request::get('qualification')}}" name="qualification" placeholder="Qaulification">
                   </div>
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-3">
                     <label>Work Experience</label>
                     <input type="text" class="form-control" value="{{Request::get('work_experience')}}" name="work_experience" placeholder="Qaulification">
                   </div>
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-3">
                     <label>Marital Status</label>
                     <input type="text" class="form-control" value="{{Request::get('marital_status')}}" name="marital_status" placeholder="Marital Status">
                   </div>
-                  <div class="form-group col-md-2">
-                    <label>Current Address</label>
+                  <div class="form-group col-md-3">
+                    <label>Address</label>
                     <input type="text" class="form-control" value="{{Request::get('address')}}" name="address" placeholder="address">
                   </div>
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-3">
                         <label>Status</label>
                         <select class="form-control" name="status">
                             <option value="">Select Status</option>
@@ -82,13 +82,13 @@
                         </select>
                   </div>
 
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-3">
                     <label>Employment Date</label>
                     <input type="date" class="form-control" value="{{Request::get('employment_date')}}" name="employment_date" placeholder="Enter date">
                   </div>
                   <div class="form-group col-md-3">
                     <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
-                    <a href="{{url('admin/teacher/list')}}" class="btn btn-success" type="submit" style="margin-top: 30px;">Reset</a  >
+                    <a href="{{url('admin/teacher/list')}}" class="btn btn-success" type="submit" style="margin-top: 30px;">Reset</a >
                   </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@
               <div class="card-header">
                 <h3 class="card-title">Teacher List</h3>
               </div>
-              <!-- /.card-header -->
+
               <div class="card-body p-0" style="overflow: auto;">
                 <table class="table table-striped">
                   <thead>
@@ -125,11 +125,12 @@
                        <th>Action</th>
                     </tr>
                   </thead>
+                 @php($i = 1)
 
                   <tbody>
                     @foreach($getRecord as $value)
                     <tr>
-                        <td>{{$value->id}}</td>
+                        <td>{{$i++}}</td>
                         <td>
                             @if(!empty($value->getProfile()))
                                 <img src="{{$value->getProfile()}}" style="height: 50px; width:50px; border-radius: 50px;">
@@ -144,7 +145,7 @@
 
                         <td>{{ $value->marital_status}}</td>
                         <td>{{$value->qualification}}</td>
-                      >
+
                         <td>{{date('d-m-Y', strtotime($value->employment_date))}}</td>
 
 
