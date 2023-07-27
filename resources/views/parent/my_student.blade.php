@@ -26,18 +26,14 @@
         <div class="row">
           <div class="col-md-12">
 
-
-
-
             @include('_message')
-
 
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">My Student</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body p-0">
+              <div class="card-body p-0"  style="overflow: auto;">
                 <table class="table table-striped">
                   <thead>
                     <tr>
@@ -74,14 +70,17 @@
                         <td> {{ ($value->status == 0) ? 'Active' : 'Inactive' }}</td>
                         <td>{{$value->email}}</td>
 
-                        <td class=>
+                        <td style="min-width: 600px;">
                             {{-- {{url('admin/student/view-student/'.$value->id)}} --}}
 
-                                <a href="" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
-                                <a href="{{url('parent/my-student/subject/'.$value->id)}}" class="btn btn-primary btn-sm">Subject</a>
-                                {{-- <a href="{{url('admin/parent/delete-student/'.$value->id)}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a> --}}
-                                {{-- <a href="{{url('admin/parent/assign-student-parent-delete/'.$value->id)}}" class="btn btn-danger btn-sm">Delete</i></a> --}}
-
+                                {{-- <a href="" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a> --}}
+                                <a href="{{url('parent/my-student/subject/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-success btn-sm">Subject</a>
+                                <a href="{{url('parent/my-student/subject/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-info btn-sm">Attendance</a>
+                                 <a href="{{url('parent/my-student/homework/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-secondary btn-sm">Homework</a>
+                                 <a href="{{url('parent/my-student/submitted-homework/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-success btn-sm">Submitted Homework</a>
+                                <a href="{{url('parent/my-student/subject/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-info btn-sm">Calender</a>
+                                 <a href="{{url('parent/my-student/subject/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-primary btn-sm">Exam Timetable</a>
+                                <a href="{{url('parent/my-student/subject/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-warning btn-sm">Exam Result</a>
                         </td>
                     </tr>
                     @endforeach

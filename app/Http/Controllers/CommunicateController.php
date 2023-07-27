@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendEmailUserMail;
 use App\Models\NoticeBoardMessageModel;
 use App\Models\NoticeBoardModel;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CommunicateController extends Controller
 {
@@ -121,5 +123,63 @@ class CommunicateController extends Controller
         $data['getRecord'] = NoticeBoardModel::getRecordUser(3);
         $data['header_title'] = 'Notice Board';
         return view('parent.my-student-notice-board', $data);
+    }
+
+    // Email Part
+
+    public function sendEmail()
+    {
+        // $data['getRecord'] = NoticeBoardModel::getRecordUser(3);
+        $data['header_title'] = 'Send Email';
+        return view('admin.communicate.email.send-email', $data);
+    }
+
+    public function searchUser(Request $request)
+    {
+        $json = array();
+        if (!empty($request->search)) {
+            $getUser = User::searchUser($request->search);
+            foreach ($getUser as $value) {
+                $type = '';
+                if ($value->user_type == 1) {
+                    $type = 'Admin';
+                } else if ($value->user_type == 2) {
+                    $type = 'Teacher';
+                } else if ($value->user_type == 3) {
+                    $type = 'Student';
+                } else if ($value->user_type == 4) {
+                    $type = 'Parent';
+                }
+                $name = $value->name . ' ' . $value->middle_name . ' '  . $value->last_name . '  - ' . $type;
+                $json[] = ['id' => $value->id, 'text' => $name];
+            }
+        }
+        echo json_encode($json);
+    }
+
+    public function sendEmailUser(Request $request)
+    {
+        if (!empty($request->user_id)) {
+            $user = User::getSingle($request->user_id);
+            $user->send_subject = $request->subject;
+            $user->send_message = $request->message;
+
+            Mail::to($user->email)->send(new SendEmailUserMail($user));
+        }
+
+        if (!empty($request->message_to)) {
+            foreach ($request->message_to as $user_type) {
+                $getUser = User::getUser($user_type);
+                foreach ($getUser as $user) {
+                    $user->send_subject = $request->subject;
+                    $user->send_message = $request->message;
+
+                    Mail::to($user->email)->send(new SendEmailUserMail($user));
+                }
+            }
+        }
+
+
+        return redirect()->back()->with('success', 'Mail Successfully send');
     }
 }

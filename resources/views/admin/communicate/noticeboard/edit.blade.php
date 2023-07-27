@@ -97,7 +97,7 @@
 
 @section('script')
 
-<script src="{{url('public/dist/plugins/summernote/summernote-bs4.min.js')}}"></script>
+<script src="{{url('public/plugins/summernote/summernote-bs4.min.js')}}"></script>
 
 
 <script type="text/javascript">
