@@ -43,6 +43,36 @@ class SubmitHomeworkModel extends Model
         return $return;
     }
 
+    static public function gethomeworkReport()
+    {
+        $return = self::select(
+            'homework_submit.*',
+            'class.name as class_name',
+            'subject.name as subject_name',
+            'users.name as first_name',
+            'users.middle_name as middle_name',
+            'users.last_name as last_name'
+        )
+            ->join('users', 'users.id', '=', 'homework_submit.student_id')
+            ->join('homework', 'homework.id', '=', 'homework_submit.homework_id')
+            ->join('subject', 'subject.id', '=', 'homework.subject_id')
+            ->join('class', 'class.id', '=', 'homework.class_id');
+
+        if (!empty(Request::get('class_name'))) {
+            $return = $return->where('class.name', 'like', '%' . trim(Request::get('class_name')) . '%');
+        }
+
+        if (!empty(Request::get('subject_name'))) {
+            $return = $return->where('subject.name', 'like', '%' . trim(Request::get('subject_name')) . '%');
+        }
+
+
+        $return = $return->orderBy('homework_submit.created_at', 'desc')
+            ->paginate(20);
+
+        return $return;
+    }
+
     static public function getRecordStudent($student_id)
     {
         $return = self::select('homework_submit.*', 'class.name as class_name', 'subject.name as subject_name',)

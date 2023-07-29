@@ -223,16 +223,14 @@
             <ul class="nav nav-treeview">
 
               <li class="nav-item">
-                 <a href="{{url('admin/communicate/notice-board')}}" class="nav-link @if(Request::segment(2) == 'notice-board') active @endif">
+                 <a href="{{url('admin/communicate/notice-board')}}" class="nav-link @if(Request::segment(3) == 'notice-board') active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Notice Board</p>
                 </a>
               </li>
 
-
-
               <li class="nav-item">
-                 <a href="{{url('admin/communicate/send-email')}}" class="nav-link @if(Request::segment(2) == 'send-email') active @endif">
+                 <a href="{{url('admin/communicate/send-email')}}" class="nav-link @if(Request::segment(3) == 'send-email') active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Send Email</p>
                 </a>
@@ -252,26 +250,46 @@
             <ul class="nav nav-treeview">
 
               <li class="nav-item">
-                 <a href="{{url('admin/homework/homework')}}" class="nav-link @if(Request::segment(2) == 'homework') active @endif">
+                 <a href="{{url('admin/homework/homework')}}" class="nav-link @if(Request::segment(3) == 'homework') active @endif">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Homework</p>
+                  <p>Homework List</p>
                 </a>
               </li>
 
-
-{{--
               <li class="nav-item">
-                 <a href="{{url('admin/communicate/send-email')}}" class="nav-link @if(Request::segment(2) == 'send-email') active @endif">
+                 <a href="{{url('admin/homework/homework-report')}}" class="nav-link @if(Request::segment(3) == 'homework-report') active @endif">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Send Email</p>
+                  <p>Homework Reports</p>
                 </a>
               </li>
-              --}}
-
             </ul>
           </li>
 
+          <li class="nav-item @if(Request::segment(2) == 'examination') menu-is-opening menu-open @endif">
+            <a href="#" class="nav-link @if(Request::segment(2) == 'examination') active @endif">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Examination
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
 
+              <li class="nav-item">
+                 <a href="{{url('admin/examination/exam-list')}}" class="nav-link @if(Request::segment(3) == 'exam-list') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Exam List</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                 <a href="{{url('admin/examination/exam-schedule')}}" class="nav-link @if(Request::segment(3) == 'exam-schedule') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Exam Schedules</p>
+                </a>
+              </li>
+            </ul>
+          </li>
 
 
           <li class="nav-item">

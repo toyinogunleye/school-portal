@@ -320,4 +320,11 @@ class HomeworkController extends Controller
         $data['getStudent'] = $getStudent;
         return view('parent.homework.submittedlist', $data);
     }
+
+    public function homeworkReport()
+    {
+        $data['getRecord'] = SubmitHomeworkModel::getHomeworkReport();
+        $data['header_title'] = 'Homework Report';
+        return view('admin.homework.report', $data);
+    }
 }

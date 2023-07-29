@@ -57,6 +57,7 @@
                         <td>{{$i++}}</td>
                         <td>
                             @if(!empty($value->getProfile()))
+                            <li class="list-inline-item">
                                 <img src="{{$value->getProfile()}}" style="height: 50px; width:50px; border-radius: 50px;">
                             @else
                                 <img src="{{ asset('public/upload/profile/default-profile.png') }}" alt="Image" style="height: 50px; width:50px; border-radius: 50px;">
@@ -70,11 +71,14 @@
                         <td> {{ ($value->status == 0) ? 'Active' : 'Inactive' }}</td>
                         <td>{{$value->email}}</td>
 
+
                         <td style="min-width: 600px;">
                             {{-- {{url('admin/student/view-student/'.$value->id)}} --}}
 
                                 {{-- <a href="" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a> --}}
                                 <a href="{{url('parent/my-student/subject/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-success btn-sm">Subject</a>
+
+
                                 <a href="{{url('parent/my-student/subject/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-info btn-sm">Attendance</a>
                                  <a href="{{url('parent/my-student/homework/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-secondary btn-sm">Homework</a>
                                  <a href="{{url('parent/my-student/submitted-homework/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-success btn-sm">Submitted Homework</a>
@@ -82,6 +86,7 @@
                                  <a href="{{url('parent/my-student/subject/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-primary btn-sm">Exam Timetable</a>
                                 <a href="{{url('parent/my-student/subject/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-warning btn-sm">Exam Result</a>
                         </td>
+
                     </tr>
                     @endforeach
 
