@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,6 +12,12 @@ class DashboardController extends Controller
     {
         $data['header_title'] = 'Dashboard';
         if (Auth::user()->user_type == 1) {
+
+            $data['TotalAdmin'] = User::getTotalUser(1);
+            $data['TotalTeacher'] = User::getTotalUser(2);
+            $data['TotalStudent'] = User::getTotalUser(3);
+            $data['TotalParent'] = User::getTotalUser(4);
+
             return view('admin/dashboard', $data);
         } else if (Auth::user()->user_type == 2) {
             return view('teacher/dashboard', $data);

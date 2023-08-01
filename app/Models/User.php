@@ -54,6 +54,14 @@ class User extends Authenticatable
         return self::find($id);
     }
 
+    static public function getTotalUser($user_type)
+    {
+        return self::select('users.id')
+            ->where('user_type', '=', $user_type)
+            ->where('is_delete', '=', 0)
+            ->count();
+    }
+
     static public function getUser($user_type)
     {
         return self::select('users.*')
@@ -298,6 +306,20 @@ class User extends Authenticatable
             ->paginate(20);
         return $return;
     }
+
+    static public function getStudentClass($class_id)
+    {
+        return self::select('users.id', 'users.name',  'users.middle_name', 'users.last_name')
+            ->where('users.user_type', '=', 3)
+            ->where('users.is_delete', '=', 0)
+            ->where('users.class_id', '=', $class_id)
+            ->orderBy('users.name', 'ASC')
+            ->get();
+    }
+
+
+
+
 
     static function getTeacherStudent($teacher_id)
     {

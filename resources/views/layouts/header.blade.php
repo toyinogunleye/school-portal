@@ -288,6 +288,15 @@
                   <p>Exam Schedules</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                 <a href="{{url('admin/examination/mark-register')}}" class="nav-link @if(Request::segment(3) == 'mark-register') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Marks Register</p>
+                </a>
+              </li>
+
+
             </ul>
           </li>
 
@@ -373,8 +382,16 @@
                 </a>
               </li> --}}
 
-
             </ul>
+          </li>
+
+           <li class="nav-item">
+            <a href="{{url('teacher/exam-timetable')}}" class="nav-link @if(Request::segment(2) == 'exam-timetable') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+              Exam Timetable
+              </p>
+            </a>
           </li>
 
            <li class="nav-item">
@@ -446,12 +463,8 @@
                   <p>Submitted Homework</p>
                 </a>
               </li>
-
-
             </ul>
           </li>
-
-
 
            <li class="nav-item">
             <a href="{{url('student/notice-board')}}" class="nav-link @if(Request::segment(2) == 'notice-board') active @endif">
@@ -461,6 +474,17 @@
               </p>
             </a>
           </li>
+
+           <li class="nav-item">
+            <a href="{{url('student/exam-timetable')}}" class="nav-link @if(Request::segment(2) == 'exam-timetable') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+              Exam Timetable
+              </p>
+            </a>
+          </li>
+
+
            <li class="nav-item">
             <a href="{{url('student/change-password')}}" class="nav-link @if(Request::segment(2) == 'change-password') active @endif">
               <i class="nav-icon far fa-user"></i>
@@ -514,6 +538,16 @@
               </p>
             </a>
           </li>
+{{--
+           <li class="nav-item">
+            <a href="{{url('parent/exam-timetable')}}" class="nav-link @if(Request::segment(2) == 'exam-timetable') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+              Exam Timetable
+              </p>
+            </a>
+          </li> --}}
+
 
 
            <li class="nav-item">

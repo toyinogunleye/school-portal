@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AssignClassTeacherModel;
 use App\Models\ClassModel;
 use App\Models\ClassSubjectModel;
 use App\Models\ExamModel;
 use App\Models\ExamScheduleModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -150,5 +152,138 @@ class ExaminationController extends Controller
             }
         }
         return redirect()->back()->with('success', 'Exam Schedule Successfully Save');
+    }
+
+    public function markRegister(Request $request)
+    {
+        $data['getClass'] = ClassModel::getClassList();
+        $data['getExam'] = ExamModel::getExam();
+
+        if (!empty($request->get('exam_id')) && !empty($request->get('class_id'))) {
+
+            $data['getSubject'] = ExamScheduleModel::getSubject($request->get('exam_id'), $request->get('class_id'));
+            $data['getStudent'] = User::getStudentClass($request->get('class_id'));
+        }
+
+        $data['header_title'] = 'Mark Register';
+        return view('admin.exam.mark-register', $data);
+    }
+
+    //Student
+
+    public function examTimetable()
+    {
+        $class_id  = Auth::user()->class_id;
+        $getExam = ExamScheduleModel::getExam($class_id);
+        $result = array();
+        foreach ($getExam as $value) {
+
+            $dataE = array();
+            $dataE['name'] = $value->exam_name;
+
+            $getExamTimetable = ExamScheduleModel::getExamTimetable($value->exam_id, $class_id);
+            $resultS = array();
+            foreach ($getExamTimetable as $valueS) {
+
+                $dataS = array();
+                $dataS['subject_name'] = $valueS->subject_name;
+                $dataS['exam_date'] = $valueS->exam_date;
+                $dataS['start_time'] = $valueS->start_time;
+                $dataS['end_time'] = $valueS->end_time;
+                $dataS['exam_venue'] = $valueS->exam_venue;
+                $dataS['pass_mark'] = $valueS->pass_mark;
+                $dataS['full_mark'] = $valueS->full_mark;
+                $resultS[] = $dataS;
+            }
+            $dataE['exam'] = $resultS;
+            $result[] = $dataE;
+        }
+
+        $data['getRecord'] = $result;
+        $data['header_title'] = 'Exam Timetable';
+        return view('student.exam-timetable', $data);
+    }
+
+    // Teacher
+    public function examTimetableTeacher()
+    {
+        $result = array();
+
+        $getClass  = AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
+
+        foreach ($getClass as $class) {
+            $dataC = array();
+            $dataC['class_name'] = $class->class_name;
+            $getExam = ExamScheduleModel::getExam($class->class_id);
+            $examArray = array();
+            foreach ($getExam as $exam) {
+                $dataE = array();
+                $dataE['exam_name'] = $exam->exam_name;
+
+                $getExamTimetable = ExamScheduleModel::getExamTimetable($exam->exam_id, $class->class_id);
+
+                $subjectArray = array();
+
+                foreach ($getExamTimetable as $valueS) {
+
+                    $dataS = array();
+                    $dataS['subject_name'] = $valueS->subject_name;
+                    $dataS['exam_date'] = $valueS->exam_date;
+                    $dataS['start_time'] = $valueS->start_time;
+                    $dataS['end_time'] = $valueS->end_time;
+                    $dataS['exam_venue'] = $valueS->exam_venue;
+                    $dataS['pass_mark'] = $valueS->pass_mark;
+                    $dataS['full_mark'] = $valueS->full_mark;
+                    $subjectArray[] = $dataS;
+                }
+
+                $dataE['subject'] = $subjectArray;
+                $examArray[] = $dataE;
+            }
+
+            $dataC['exam'] = $examArray;
+            $result[] = $dataC;
+        }
+
+
+        $data['getRecord'] = $result;
+        $data['header_title'] = 'Exam Timetable';
+        return view('teacher.exam-timetable', $data);
+    }
+
+    // Parent
+    public function examTimetableParent($student_id)
+    {
+        $getStudent = User::getSingle($student_id);
+        $class_id  = $getStudent->class_id;
+        $getExam = ExamScheduleModel::getExam($class_id);
+        $result = array();
+        foreach ($getExam as $value) {
+
+            $dataE = array();
+            $dataE['name'] = $value->exam_name;
+
+            $getExamTimetable = ExamScheduleModel::getExamTimetable($value->exam_id, $class_id);
+            $resultS = array();
+            foreach ($getExamTimetable as $valueS) {
+
+                $dataS = array();
+                $dataS['subject_name'] = $valueS->subject_name;
+                $dataS['exam_date'] = $valueS->exam_date;
+                $dataS['start_time'] = $valueS->start_time;
+                $dataS['end_time'] = $valueS->end_time;
+                $dataS['exam_venue'] = $valueS->exam_venue;
+                $dataS['pass_mark'] = $valueS->pass_mark;
+                $dataS['full_mark'] = $valueS->full_mark;
+                $resultS[] = $dataS;
+            }
+            $dataE['exam'] = $resultS;
+            $result[] = $dataE;
+        }
+
+        $data['getRecord'] = $result;
+        $data['getStudent'] = $getStudent;
+        $data['header_title'] = 'Exam Timetable';
+        return view('parent.exam-timetable', $data);
     }
 }

@@ -115,10 +115,12 @@
                     </tr>
                   </thead>
 
+                  @php($i = 1)
+
                   <tbody>
                     @foreach($getRecord as $value)
                     <tr>
-                        <td>{{$value->id}}</td>
+                        <td>{{$i++}}</td>
                         <td>
                             @if(!empty($value->getProfile()))
                                 <img src="{{$value->getProfile()}}" style="height: 50px; width:50px; border-radius: 50px;">
@@ -139,7 +141,7 @@
                                 {{-- <a href="{{url('admin/student/view-student/'.$value->id)}}" class="btn btn-info"><i class="fas fa-eye"></i></a> --}}
                                 <a href="{{url('admin/parent/edit-parent/'.$value->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></a>
                                 <a href="{{url('admin/parent/delete-parent/'.$value->id)}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
-                                 <a href="{{url('admin/parent/my-student/'.$value->id)}}" class="btn btn-primary btn-sm">My Student</i></a>
+                                 <a href="{{url('admin/parent/my-student/'.$value->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-users"></i></a>
 
                         </td>
                     </tr>

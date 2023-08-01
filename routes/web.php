@@ -161,6 +161,8 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::get('/admin/examination/exam-schedule', [ExaminationController::class, 'examSchedule']);
     Route::post('/admin/examination/insert-exam-schedule', [ExaminationController::class, 'insertExamSchedule']);
+
+    Route::get('/admin/examination/mark-register', [ExaminationController::class, 'markRegister']);
 });
 
 
@@ -185,6 +187,8 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::post('/teacher/homework/edit-homework/{id}', [HomeworkController::class, 'updateHomeworkTeacher']);
     Route::get('/teacher/homework/delete-homework/{id}', [HomeworkController::class, 'deleteHomeworkTeacher']);
     Route::get('/teacher/homework/submitted-homework/{id}', [HomeworkController::class, 'teacherSubmittedHomework']);
+    //Exam Timetable
+    Route::get('/teacher/exam-timetable', [ExaminationController::class, 'examTimetableTeacher']);
 });
 
 
@@ -202,6 +206,9 @@ Route::group(['middleware' => 'student'], function () {
     Route::get('/student/homework/submit-homework/{id}', [HomeworkController::class, 'submitHomework']);
     Route::post('/student/homework/submit-homework/{id}', [HomeworkController::class, 'submitHomeworkInsert']);
     Route::get('/student/homework/my-submitted-homework', [HomeworkController::class, 'studentSubmittedHomework']);
+
+    //Exam Timetable
+    Route::get('/student/exam-timetable', [ExaminationController::class, 'examTimetable']);
 });
 
 
@@ -217,4 +224,6 @@ Route::group(['middleware' => 'parent'], function () {
     Route::get('/parent/my-student-notice-board', [CommunicateController::class, 'myStudentNoticeBoard']);
     Route::get('/parent/my-student/homework/{id}', [HomeworkController::class, 'homeworkStudentParent']);
     Route::get('/parent/my-student/submitted-homework/{id}', [HomeworkController::class, 'submittedHomeworkStudentParent']);
+
+    Route::get('/parent/my-student/exam-timetable/{id}', [ExaminationController::class, 'examTimetableParent']);
 });

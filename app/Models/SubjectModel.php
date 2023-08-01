@@ -36,7 +36,7 @@ class SubjectModel extends Model
         }
 
         $return = $return->where('subject.is_delete', '=', 0)
-            ->orderBy('subject.created_at', 'desc')
+            ->orderBy('subject.name', 'ASC')
             ->paginate(20);
         return $return;
     }
@@ -52,7 +52,7 @@ class SubjectModel extends Model
             ->join('users', 'users.id', 'subject.created_by')
             ->where('subject.is_delete', '=', 0)
             ->where('subject.status', '=', 0)
-            ->orderBy('subject.name', 'asc')
+            ->orderBy('subject.name', 'ASC')
             ->get();
         return $return;
     }
