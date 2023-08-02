@@ -176,8 +176,8 @@
             </a>
           </li>
 
-          <li class="nav-item @if(Request::segment(2) == 'class' || Request::segment(2) == 'subject' || Request::segment(2) == 'class-subject' || Request::segment(2) == 'assign-class-teacher') menu-is-opening menu-open @endif">
-            <a href="#" class="nav-link @if(Request::segment(2) == 'class' || Request::segment(2) == 'subject' || Request::segment(2) == 'class-subject' || Request::segment(2) == 'assign-class-teacher') active @endif">
+          <li class="nav-item @if(Request::segment(2) == 'class' || Request::segment(2) == 'subject' || Request::segment(2) == 'class-subject' || Request::segment(2) == 'assign-class-teacher' || Request::segment(2) == 'class-timetable') menu-is-opening menu-open @endif">
+            <a href="#" class="nav-link @if(Request::segment(2) == 'class' || Request::segment(2) == 'subject' || Request::segment(2) == 'class-subject' || Request::segment(2) == 'assign-class-teacher' || Request::segment(2) == 'class-timetable') active @endif">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Academics
@@ -207,6 +207,12 @@
                 <a href="{{url('admin/assign-class-teacher/list')}}" class="nav-link @if(Request::segment(2) == 'assign-class-teacher') active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Assign Class Teacher</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="{{url('admin/class-timetable/list')}}" class="nav-link @if(Request::segment(2) == 'class-timetable') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Class Timetable</p>
                 </a>
               </li>
             </ul>

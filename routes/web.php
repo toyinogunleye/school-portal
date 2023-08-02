@@ -5,6 +5,7 @@ use App\Http\Controllers\AssignClassTeacherController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ClassSubjectController;
+use App\Http\Controllers\ClassTimetableController;
 use App\Http\Controllers\CommunicateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExaminationController;
@@ -123,6 +124,13 @@ Route::group(['middleware' => 'admin'], function () {
     //change password
     Route::get('/admin/change-password', [UserController::class, 'changePassword']);
     Route::post('/admin/change-password', [UserController::class, 'updateChangePassword']);
+
+    //CLASS Timetable
+    Route::get('/admin/class-timetable/list', [ClassTimetableController::class, 'classTimetableList']);
+    Route::post('/admin/class-timetable/add', [ClassTimetableController::class, 'insert_update']);
+
+    Route::post('/admin/class_timetable/get_subject ', [ClassTimetableController::class, 'getSubject']);
+
 
 
     //Notice board
