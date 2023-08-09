@@ -171,6 +171,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin/examination/insert-exam-schedule', [ExaminationController::class, 'insertExamSchedule']);
 
     Route::get('/admin/examination/mark-register', [ExaminationController::class, 'markRegister']);
+    Route::post('/admin/examination/submit-mark-register', [ExaminationController::class, 'submitMarkRegister']);
+    Route::post('/admin/examination/single-submit-mark-register', [ExaminationController::class, 'singleSubmitMarkRegister']);
 });
 
 
@@ -195,6 +197,10 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::post('/teacher/homework/edit-homework/{id}', [HomeworkController::class, 'updateHomeworkTeacher']);
     Route::get('/teacher/homework/delete-homework/{id}', [HomeworkController::class, 'deleteHomeworkTeacher']);
     Route::get('/teacher/homework/submitted-homework/{id}', [HomeworkController::class, 'teacherSubmittedHomework']);
+
+    //Teacher Timetable
+    Route::get('/teacher/my-class-subject/class-timetable/{class_id}/{subject_id}', [ClassTimetableController::class, 'timetableTeacher']);
+
     //Exam Timetable
     Route::get('/teacher/exam-timetable', [ExaminationController::class, 'examTimetableTeacher']);
 });
@@ -215,6 +221,9 @@ Route::group(['middleware' => 'student'], function () {
     Route::post('/student/homework/submit-homework/{id}', [HomeworkController::class, 'submitHomeworkInsert']);
     Route::get('/student/homework/my-submitted-homework', [HomeworkController::class, 'studentSubmittedHomework']);
 
+    //Class Timetable
+    Route::get('/student/class-timetable', [ClassTimetableController::class, 'timetableStudent']);
+
     //Exam Timetable
     Route::get('/student/exam-timetable', [ExaminationController::class, 'examTimetable']);
 });
@@ -234,4 +243,5 @@ Route::group(['middleware' => 'parent'], function () {
     Route::get('/parent/my-student/submitted-homework/{id}', [HomeworkController::class, 'submittedHomeworkStudentParent']);
 
     Route::get('/parent/my-student/exam-timetable/{id}', [ExaminationController::class, 'examTimetableParent']);
+    Route::get('/parent/my-student/subject/class-timetable/{class_id}/{subject_id}/{student_id}', [ClassTimetableController::class, 'timetableParent']);
 });

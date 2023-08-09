@@ -69,7 +69,7 @@
                          <td>{{$value->gender}}</td>
                         <td><b>{{$value->class_name}}</b></td>
                         <td> {{ ($value->status == 0) ? 'Active' : 'Inactive' }}</td>
-                        <td>{{$value->email}}</td>
+                        <td>{{$value->created_at}}</td>
 
 
                         <td style="min-width: 600px;">

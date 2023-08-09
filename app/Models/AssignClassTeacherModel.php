@@ -66,7 +66,9 @@ class AssignClassTeacherModel extends Model
             'assign_class_teacher.*',
             'class.name as class_name',
             'subject.name as subject_name',
-            'subject.type as subject_type'
+            'subject.type as subject_type',
+            'class.id as class_id',
+            'subject.id as subject_id',
         )
             ->join('class', 'class.id', '=', 'assign_class_teacher.class_id')
             ->join('class_subject', 'class_subject.class_id', '=', 'class.id')
@@ -110,5 +112,12 @@ class AssignClassTeacherModel extends Model
     static public function deleteTeacher($class_id)
     {
         return self::where('class_id', '=', $class_id)->delete();
+    }
+
+    static public function getMyTimetable($class_id, $subject_id)
+    {
+        $getWeek = WeekModel::getWeekUsingName(date('l'));
+
+        return ClassSubjectTimetableModel::getRecordClassSubject($class_id, $subject_id, $getWeek->id);
     }
 }

@@ -36,26 +36,42 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>S/N</th>
+                      {{-- <th>S/N</th> --}}
                       <th>Class Name</th>
                       <th>Subject Name</th>
                       <th>Subject Type</th>
+                      <th>Class Timetable</th>
                       <th>Created Date</th>
+                        <th>Action</th>
+
                     </tr>
                   </thead>
-                  @php($i = 1)
+
                   <tbody>
                     @foreach($getRecord as $value)
                     <tr>
-                         <td>{{$i++}}</td>
+                        {{-- <td>{{$i++}}</td> --}}
                         <td>{{$value->class_name}}</td>
                         <td>{{$value->subject_name}}</td>
                         <td>{{$value->subject_type}}</td>
+                        <td>
+                            @php
+                                $classSubject =  $value->getMyTimetable($value->class_id, $value->subject_id);
+                            @endphp
+                           @if(!empty($classSubject))
+                                {{ date('h:i A',strtotime($classSubject->start_time))}} - {{ date('h:i A',strtotime($classSubject->end_time ))}}
+                                <br />
+                                Venue: {{$classSubject->venue}}
+
+                           @endif
+                        </td>
                         <td>{{date('d-m-Y H:i A', strtotime($value->created_at))}}</td>
-
+                        <td>
+                        <a href="{{url('teacher/my-class-subject/class-timetable/'.$value->class_id.'/'.$value->subject_id)}}" class="btn btn-primary btn-sm">Class Timetable</a>
+                        </td>
                     </tr>
-                    @endforeach
 
+                    @endforeach
                   </tbody>
                 </table>
                 <div style="padding: 10px;">
