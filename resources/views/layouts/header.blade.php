@@ -302,6 +302,13 @@
                 </a>
               </li>
 
+               <li class="nav-item">
+                 <a href="{{url('admin/examination/mark-grade')}}" class="nav-link @if(Request::segment(3) == 'mark-grade') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Mark Grade</p>
+                </a>
+              </li>
+
 
             </ul>
           </li>
@@ -396,6 +403,15 @@
               <i class="nav-icon far fa-user"></i>
               <p>
               Exam Timetable
+              </p>
+            </a>
+          </li>
+
+           <li class="nav-item">
+            <a href="{{url('teacher/mark-register')}}" class="nav-link @if(Request::segment(2) == 'mark-register') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+              Marks Register
               </p>
             </a>
           </li>
@@ -497,6 +513,15 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="{{url('student/my-exam-result')}}" class="nav-link @if(Request::segment(2) == 'my-exam-result') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+              Exam Result
+              </p>
+            </a>
+          </li>
+
 
            <li class="nav-item">
             <a href="{{url('student/change-password')}}" class="nav-link @if(Request::segment(2) == 'change-password') active @endif">
@@ -547,7 +572,7 @@
             <a href="{{url('parent/my-student-notice-board')}}" class="nav-link @if(Request::segment(2) == 'my-student-notice-board') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-             My Student Notice Board
+             Student Notice Board
               </p>
             </a>
           </li>

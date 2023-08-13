@@ -84,7 +84,7 @@
                                  <a href="{{url('parent/my-student/submitted-homework/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-success btn-sm">Submitted Homework</a>
                                 <a href="{{url('parent/my-student/subject/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-info btn-sm">Calender</a>
                                  <a href="{{url('parent/my-student/exam-timetable/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-primary btn-sm">Exam Timetable</a>
-                                <a href="{{url('parent/my-student/subject/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-warning btn-sm">Exam Result</a>
+                                <a href="{{url('parent/my-student/exam-result/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-warning btn-sm">Exam Result</a>
                         </td>
 
                     </tr>

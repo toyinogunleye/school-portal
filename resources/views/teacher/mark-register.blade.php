@@ -34,7 +34,7 @@
                     <select class="form-control" name="exam_id" required>
                         <option value="">Select</option>
                         @foreach ($getExam as $exam ){
-                            <option {{(Request::get('exam_id') == $exam->id) ? 'selected' : ''}} value="{{$exam->id}}">{{$exam->name}}</option>
+                            <option {{(Request::get('exam_id') == $exam->exam_id) ? 'selected' : ''}} value="{{$exam->exam_id}}">{{$exam->exam_name}}</option>
                         }
                         @endforeach
                     </select>
@@ -45,7 +45,7 @@
                     <select class="form-control" name="class_id" required>
                         <option value="">Select</option>
                         @foreach ($getClass as $class ){
-                            <option  {{(Request::get('class_id') == $class->id) ? 'selected' : ''}} value="{{$class->id}}">{{$class->name}}</option>
+                            <option  {{(Request::get('class_id') == $class->class_id) ? 'selected' : ''}} value="{{$class->class_id}}">{{$class->class_name}}</option>
                         }
                         @endforeach
                     </select>
@@ -173,28 +173,14 @@
                                               <div style="margin-bottom: 10px" >
                                                <b>Total Mark: </b>{{ $totalMark }} <br />
                                                <b>Passing Mark: </b>{{ $subject->pass_mark }} <br />
+
                                                @php
                                                   $getLoopGrade = App\Models\MarkGradeModel::getGrade($totalMark);
                                                @endphp
                                                @if(!empty($getLoopGrade))
                                                 <b>Grade: </b>{{ $getLoopGrade }} <br />
-
                                                @endif
 
-
-                                               {{-- @if($totalMark >= 74 && $totalMark <= 100)
-                                               <b>Grade: </b>A <br />
-                                               @elseif ($totalMark >= 65 && $totalMark < 74)
-                                               <b>Grade: </b>B <br />
-                                               @elseif ($totalMark >= 50 && $totalMark < 65)
-                                               <b>Grade: </b>C <br />
-                                               @elseif ($totalMark >= 45 && $totalMark < 50)
-                                               <b>Grade: </b>D <br />
-                                               @elseif ($totalMark >= 40 && $totalMark < 45)
-                                               <b>Grade: </b>E <br />
-                                               @elseif ($totalMark >= 0  && $totalMark < 40)
-                                               <b>Grade: </b>F <br />
-                                               @endif --}}
                                                 @if(!empty($getLoopGrade))
                                                 @if( $getLoopGrade !== 'F' )
                                                 <span style="color: green; font-weight:bold;">Pass</span>
@@ -206,10 +192,12 @@
                                                @endif
                                                @endif
 
+
+
                                                {{-- @if( $totalMark >= $subject->pass_mark )
-                                                <span style="color: green; font-weight:bold;">Pass</span>
+                                                Remark: <span style="color: green; font-weight:bold;">Pass</span>
                                                @else
-                                               <span style="color: red; font-weight:bold;">Fail</span>
+                                               Remark: <span style="color: red; font-weight:bold;">Fail</span>
                                                @php
                                                    $pass_fail_val = 1;
                                                @endphp
@@ -253,7 +241,7 @@
                                            @endif
                                            <br />
 
-                                           @if(!empty($getGrade))
+                                            @if(!empty($getGrade))
                                            @if($getGrade !== 'F')
                                                 Result: <span style="color: green; font-weight:bold;">Pass</span>
                                             @else
@@ -261,11 +249,6 @@
                                             @endif
                                             @endif
 
-                                           {{-- @if($pass_fail_val == 0)
-                                                Result: <span style="color: green; font-weight:bold;">Pass</span>
-                                            @else
-                                               Result: <span style="color: red; font-weight:bold;">Fail</span>
-                                            @endif --}}
 
                                             {{-- @if($pass_fail_val == 0)
                                                 Result: <span style="color: green; font-weight:bold;">Pass</span>
@@ -313,7 +296,7 @@ $('.SubmitForm').submit(function(e){
     e.preventDefault();
     $.ajax({
         type: "POST",
-        url: "{{ url('admin/examination/submit-mark-register') }}",
+        url: "{{ url('teacher/submit-mark-register') }}",
         data : $(this).serialize(),
         dataType : "json",
         success: function(data){
@@ -336,7 +319,7 @@ $('.SaveSingleSubject').click(function(e){
 
     $.ajax({
         type: "POST",
-        url: "{{ url('admin/examination/single-submit-mark-register') }}",
+        url: "{{ url('teacher/single-submit-mark-register') }}",
         data : {
              '_token' : " {{ csrf_token() }} ",
             id : id,

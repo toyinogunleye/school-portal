@@ -45,6 +45,7 @@ Route::post('/reset-password/{token}', [AuthController::class, 'postResetPasswor
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'dashboard']);
+
     Route::get('/admin/admin/list', [AdminController::class, 'list']);
     Route::get('/admin/admin/add-admin', [AdminController::class, 'addAdmin']);
     Route::post('/admin/admin/add-admin', [AdminController::class, 'insertAdmin']);
@@ -173,6 +174,14 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/examination/mark-register', [ExaminationController::class, 'markRegister']);
     Route::post('/admin/examination/submit-mark-register', [ExaminationController::class, 'submitMarkRegister']);
     Route::post('/admin/examination/single-submit-mark-register', [ExaminationController::class, 'singleSubmitMarkRegister']);
+
+    //Mark Grade
+    Route::get('/admin/examination/mark-grade', [ExaminationController::class, 'listMarkGrade']);
+    Route::get('/admin/examination/mark-grade/add', [ExaminationController::class, 'addMarkGrade']);
+    Route::post('/admin/examination/mark-grade/add', [ExaminationController::class, 'insertMarkGrade']);
+    Route::get('/admin/examination/mark-grade/edit/{id}', [ExaminationController::class, 'editMarkGrade']);
+    Route::post('/admin/examination/mark-grade/edit/{id}', [ExaminationController::class, 'updateMarkGrade']);
+    Route::get('/admin/examination/mark-grade/delete/{id}', [ExaminationController::class, 'deleteMarkGrade']);
 });
 
 
@@ -203,6 +212,11 @@ Route::group(['middleware' => 'teacher'], function () {
 
     //Exam Timetable
     Route::get('/teacher/exam-timetable', [ExaminationController::class, 'examTimetableTeacher']);
+
+    //Mark Register
+    Route::get('/teacher/mark-register', [ExaminationController::class, 'markRegisterTeacher']);
+    Route::post('/teacher/submit-mark-register', [ExaminationController::class, 'submitMarkRegister']);
+    Route::post('/teacher/single-submit-mark-register', [ExaminationController::class, 'singleSubmitMarkRegister']);
 });
 
 
@@ -226,6 +240,9 @@ Route::group(['middleware' => 'student'], function () {
 
     //Exam Timetable
     Route::get('/student/exam-timetable', [ExaminationController::class, 'examTimetable']);
+
+    //Exam Result
+    Route::get('/student/my-exam-result', [ExaminationController::class, 'myExamResult']);
 });
 
 
@@ -243,5 +260,6 @@ Route::group(['middleware' => 'parent'], function () {
     Route::get('/parent/my-student/submitted-homework/{id}', [HomeworkController::class, 'submittedHomeworkStudentParent']);
 
     Route::get('/parent/my-student/exam-timetable/{id}', [ExaminationController::class, 'examTimetableParent']);
+    Route::get('/parent/my-student/exam-result/{id}', [ExaminationController::class, 'examResultParent']);
     Route::get('/parent/my-student/subject/class-timetable/{class_id}/{subject_id}/{student_id}', [ClassTimetableController::class, 'timetableParent']);
 });
