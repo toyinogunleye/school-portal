@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AssignClassTeacherController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ClassSubjectController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\ClassTimetableController;
 use App\Http\Controllers\CommunicateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExaminationController;
+use App\Http\Controllers\FeesCollectionController;
 use App\Http\Controllers\HomeworkController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
@@ -182,6 +184,15 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/examination/mark-grade/edit/{id}', [ExaminationController::class, 'editMarkGrade']);
     Route::post('/admin/examination/mark-grade/edit/{id}', [ExaminationController::class, 'updateMarkGrade']);
     Route::get('/admin/examination/mark-grade/delete/{id}', [ExaminationController::class, 'deleteMarkGrade']);
+
+    //Attendance
+    Route::get('/admin/attendance/student', [AttendanceController::class, 'attendanceStudent']);
+    Route::post('/admin/attendance/student/save', [AttendanceController::class, 'attendanceStudentSubmit']);
+    Route::get('/admin/attendance/report', [AttendanceController::class, 'attendanceReport']);
+
+    //Fees Collection
+    Route::get('/admin/fees-collection/collect-fees', [FeesCollectionController::class, 'collectFees']);
+    Route::get('/admin/fees-collection/collect-fees/add-fees', [FeesCollectionController::class, 'addCollectFees']);
 });
 
 
@@ -217,6 +228,11 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::get('/teacher/mark-register', [ExaminationController::class, 'markRegisterTeacher']);
     Route::post('/teacher/submit-mark-register', [ExaminationController::class, 'submitMarkRegister']);
     Route::post('/teacher/single-submit-mark-register', [ExaminationController::class, 'singleSubmitMarkRegister']);
+
+    //Attendance
+    Route::get('/teacher/attendance/student', [AttendanceController::class, 'attendanceStudentTeacher']);
+    Route::post('/teacher/attendance/student/save', [AttendanceController::class, 'attendanceStudentSubmit']);
+    Route::get('/teacher/attendance/report', [AttendanceController::class, 'attendanceReportTeacher']);
 });
 
 
@@ -243,6 +259,9 @@ Route::group(['middleware' => 'student'], function () {
 
     //Exam Result
     Route::get('/student/my-exam-result', [ExaminationController::class, 'myExamResult']);
+
+    //Attendance
+    Route::get('/student/my-attendance', [AttendanceController::class, 'myAttendanceStudent']);
 });
 
 
@@ -262,4 +281,6 @@ Route::group(['middleware' => 'parent'], function () {
     Route::get('/parent/my-student/exam-timetable/{id}', [ExaminationController::class, 'examTimetableParent']);
     Route::get('/parent/my-student/exam-result/{id}', [ExaminationController::class, 'examResultParent']);
     Route::get('/parent/my-student/subject/class-timetable/{class_id}/{subject_id}/{student_id}', [ClassTimetableController::class, 'timetableParent']);
+
+    Route::get('/parent/my-student/attendance/{id}', [AttendanceController::class, 'myAttendanceParent']);
 });

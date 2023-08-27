@@ -28,6 +28,7 @@ class ClassController extends Controller
         $save = new ClassModel;
         $save->id = Str::uuid()->toString();
         $save->name = trim($request->name);
+        $save->amount = trim($request->amount);
         $save->status = trim($request->status);
         $save->created_by = Auth::user()->id;
         $save->save();
@@ -50,6 +51,7 @@ class ClassController extends Controller
     {
         $save = ClassModel::getSingle($id);
         $save->name = $request->name;
+        $save->amount = trim($request->amount);
         $save->status = $request->status;
         $save->save();
 

@@ -111,6 +111,7 @@ class User extends Authenticatable
         $return = self::select('users.*')
             ->where('user_type', '=', 4)
             ->where('is_delete', '=', 0);
+
         if (!empty(Request::get('name'))) {
             $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
         }
@@ -185,6 +186,41 @@ class User extends Authenticatable
 
         return $return;
     }
+
+    static public function getCollectFeesStudent()
+    {
+
+        $return = self::select('users.*', 'class.name as class_name', 'class.amount as class_amount')
+            ->join('class', 'class.id', '=', 'users.class_id')
+            ->where('users.user_type', '=', 3)
+            ->where('users.is_delete', '=', 0);
+
+        if (!empty(Request::get('class_id'))) {
+            $return = $return->where('users.class_id', '=',  Request::get('class_id'));
+        }
+
+        if (!empty(Request::get('admission_number'))) {
+            $return = $return->where('users.admission_number', '=',  Request::get('admission_number'));
+        }
+
+        if (!empty(Request::get('name'))) {
+            $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
+        }
+
+        if (!empty(Request::get('middle_name'))) {
+            $return = $return->where('users.middle_name', 'like', '%' . Request::get('middle_name') . '%');
+        }
+        if (!empty(Request::get('last_name'))) {
+            $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name') . '%');
+        }
+
+
+        $return = $return->orderBy('users.name', 'asc')
+            ->paginate(25);
+
+        return $return;
+    }
+
 
     static function getSearchStudent()
     {
@@ -388,5 +424,10 @@ class User extends Authenticatable
         } else {
             return "";
         }
+    }
+
+    static function getAttendance($student_id, $class_id, $attendance_date)
+    {
+        return StudentAttendanceModel::CheckAlreadyAttendance($student_id, $class_id, $attendance_date);
     }
 }

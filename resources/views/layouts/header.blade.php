@@ -218,6 +218,58 @@
             </ul>
           </li>
 
+          <li class="nav-item @if(Request::segment(2) == 'fees-collection') menu-is-opening menu-open @endif">
+            <a href="#" class="nav-link @if(Request::segment(2) == 'fees-collection') active @endif">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Fees Collection
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                 <a href="{{url('admin/fees-collection/collect-fees')}}" class="nav-link @if(Request::segment(3) == 'collect-fees') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Collect Fees</p>
+                </a>
+              </li>
+
+
+
+            </ul>
+          </li>
+
+
+
+
+
+          <li class="nav-item @if(Request::segment(2) == 'attendance') menu-is-opening menu-open @endif">
+            <a href="#" class="nav-link @if(Request::segment(2) == 'attendance') active @endif">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Attendance
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                 <a href="{{url('admin/attendance/student')}}" class="nav-link @if(Request::segment(3) == 'student') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Student Attendance</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                 <a href="{{url('admin/attendance/report')}}" class="nav-link @if(Request::segment(3) == 'report') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Attendance Reports</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="nav-item @if(Request::segment(2) == 'communicate') menu-is-opening menu-open @endif">
             <a href="#" class="nav-link @if(Request::segment(2) == 'communicate') active @endif">
               <i class="nav-icon fas fa-table"></i>
@@ -308,8 +360,6 @@
                   <p>Mark Grade</p>
                 </a>
               </li>
-
-
             </ul>
           </li>
 
@@ -360,6 +410,32 @@
               My Class & Subject
               </p>
             </a>
+          </li>
+
+           <li class="nav-item @if(Request::segment(2) == 'attendance') menu-is-opening menu-open @endif">
+            <a href="#" class="nav-link @if(Request::segment(2) == 'attendance') active @endif">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Attendance
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                 <a href="{{url('teacher/attendance/student')}}" class="nav-link @if(Request::segment(3) == 'student') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Student Attendance</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                 <a href="{{url('teacher/attendance/report')}}" class="nav-link @if(Request::segment(3) == 'report') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Attendance Reports</p>
+                </a>
+              </li>
+            </ul>
           </li>
 
            <li class="nav-item">
@@ -458,6 +534,13 @@
               <p> Class Timetable </p>
             </a>
           </li>
+
+           <li class="nav-item">
+                 <a href="{{url('student/my-attendance')}}" class="nav-link @if(Request::segment(3) == 'my-attendance') active @endif">
+                  <i class="nav-icon fas fa-table"></i>
+                  <p>My Attendance</p>
+                </a>
+              </li>
 
           {{-- <li class="nav-item">
             <a href="{{url('student/my-homework')}}" class="nav-link @if(Request::segment(2) == 'my-homework') active @endif">

@@ -26,9 +26,15 @@
               <form method="post" action="">
                 {{csrf_field()}}
                 <div class="card-body">
+
                   <div class="form-group">
                     <label>Class Name</label>
                     <input type="text" class="form-control" value="{{$getRecord->name}}" name="name" required placeholder="Name">
+                  </div>
+
+                   <div class="form-group">
+                    <label>School Fees (N)</label>
+                    <input type="number" class="form-control" value="{{$getRecord->amount}}"  name="amount" required placeholder="Enter Amount">
                   </div>
 
                    <div class="form-group">

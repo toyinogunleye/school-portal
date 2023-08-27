@@ -76,13 +76,11 @@
                             {{-- {{url('admin/student/view-student/'.$value->id)}} --}}
 
                                 {{-- <a href="" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a> --}}
-                                <a href="{{url('parent/my-student/subject/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-success btn-sm">Subject</a>
-
-
-                                <a href="{{url('parent/my-student/subject/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-info btn-sm">Attendance</a>
-                                 <a href="{{url('parent/my-student/homework/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-secondary btn-sm">Homework</a>
-                                 <a href="{{url('parent/my-student/submitted-homework/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-success btn-sm">Submitted Homework</a>
+                                <a href="{{url('parent/my-student/subject/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-success btn-sm">Subjects</a>
+                                <a href="{{url('parent/my-student/attendance/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-info btn-sm">Attendance</a>
                                 <a href="{{url('parent/my-student/subject/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-info btn-sm">Calender</a>
+                                 <a href="{{url('parent/my-student/homework/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-secondary btn-sm">Homeworks</a>
+                                 <a href="{{url('parent/my-student/submitted-homework/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-secondary btn-sm">Submitted Homeworks</a>
                                  <a href="{{url('parent/my-student/exam-timetable/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-primary btn-sm">Exam Timetable</a>
                                 <a href="{{url('parent/my-student/exam-result/'.$value->id)}}" style="margin-bottom:10px;" class="btn btn-warning btn-sm">Exam Result</a>
                         </td>

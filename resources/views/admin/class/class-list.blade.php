@@ -59,13 +59,14 @@
                 <h3 class="card-title">Class List</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body p-0">
+              <div class="card-body p-0" style="overflow: auto;">
                 <table class="table table-striped">
                   <thead>
                     <tr>
                       <th>S/N</th>
-                      <th>Id</th>
+                      {{-- <th>Id</th> --}}
                       <th>Name</th>
+                      <th>School Fees</th>
                       <th>Status</th>
                       <th>Created By</th>
                       <th>Created Date</th>
@@ -77,8 +78,9 @@
                     @foreach($getRecord as $value)
                     <tr>
                          <td>{{$i++}}</td>
-                        <td>{{$value->id}}</td>
+                        {{-- <td>{{$value->id}}</td> --}}
                         <td>{{$value->name}}</td>
+                        <td>N{{ number_format($value->amount, 2) }}</td>
                         <td>
                             @if($value->status == 0)
                             Active
@@ -89,8 +91,9 @@
                         <td>{{$value->created_by_name}}</td>
                         <td>{{date('d-m-Y H:i A', strtotime($value->created_at))}}</td>
                         <td>
-                            <a class="btn btn-info btn-sm" title="Edit" href="{{url('admin/class/edit/'.$value->id)}}" ><i class="fas fa-pencil-alt"></i> </a>
-                            <a class="btn btn-danger btn-sm" title="Delete"  href="{{url('admin/class/delete/'.$value->id)}}"><i class="fas fa-trash"> </i>  </a>
+
+                            <a class="btn btn-primary btn-sm" style="margin-bottom:10px;" title="Edit" href="{{url('admin/class/edit/'.$value->id)}}" >Edit </a>
+                            <a class="btn btn-danger btn-sm" style="margin-bottom:10px;" title="Delete"  href="{{url('admin/class/delete/'.$value->id)}}">Delete </a>
 
                             {{-- <a href="{{url('admin/admin/edit/'.$value->id)}}" class="btn btn-primary">Edit</a>
                              <a href="{{url('admin/admin/delete/'.$value->id)}}" class="btn btn-danger">Delete</a> --}}
