@@ -240,10 +240,6 @@
             </ul>
           </li>
 
-
-
-
-
           <li class="nav-item @if(Request::segment(2) == 'attendance') menu-is-opening menu-open @endif">
             <a href="#" class="nav-link @if(Request::segment(2) == 'attendance') active @endif">
               <i class="nav-icon fas fa-table"></i>
@@ -363,6 +359,15 @@
             </ul>
           </li>
 
+          <li class="nav-item">
+            <a href="{{url('admin/setting')}}" class="nav-link @if(Request::segment(2) == 'setting') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+              Settings
+              </p>
+            </a>
+          </li>
+
 
           <li class="nav-item">
             <a href="{{url('admin/change-password')}}" class="nav-link @if(Request::segment(2) == 'change-password') active @endif">
@@ -372,6 +377,8 @@
               </p>
             </a>
           </li>
+
+
 
 
             @elseif (Auth::user()->user_type == 2)
@@ -501,6 +508,7 @@
             </a>
           </li>
 
+
             @elseif (Auth::user()->user_type == 3)
              <li class="nav-item">
             <a href="{{url('student/dashboard')}}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
@@ -510,6 +518,16 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{url('student/fees-payment')}}" class="nav-link @if(Request::segment(2) == 'fees-payment') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+              Fees Payment
+              </p>
+            </a>
+          </li>
+
           <li class="nav-item">
             <a href="{{url('student/my-account')}}" class="nav-link @if(Request::segment(2) == 'my-account') active @endif">
               <i class="nav-icon far fa-user"></i>

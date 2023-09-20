@@ -25,13 +25,13 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>N50,000</h3>
+                <h3>N{{ number_format($getTotalTodayFees, 2)}}</h3>
                 <p>Today's Payment</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ url('admin/fees-collection/collect-fees') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 
@@ -39,13 +39,13 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>N350,000</h3>
+                <h3>N{{ number_format($getTotalFees, 2)}}</h3>
                 <p>Total Payment</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ url('admin/fees-collection/collect-fees') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 
@@ -54,7 +54,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>{{$TotalStudent}}</h3>
+                <h3>{{$totalStudent}}</h3>
 
                 <p>Total Students</p>
               </div>
@@ -69,7 +69,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>{{$TotalTeacher}}</h3>
+                <h3>{{$totalTeacher}}</h3>
 
                 <p>Total Teachers</p>
               </div>
@@ -84,7 +84,7 @@
             <!-- small box -->
             <div class="small-box bg-primary">
               <div class="inner">
-                <h3>{{$TotalParent}}</h3>
+                <h3>{{$totalParent}}</h3>
 
                 <p>Total Parent</p>
               </div>
@@ -99,7 +99,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>{{$TotalAdmin}}</h3>
+                <h3>{{$totalAdmin}}</h3>
 
                 <p>Total Admins</p>
               </div>
@@ -111,22 +111,50 @@
           </div>
 
 
-          <!-- ./col -->
-          {{-- <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
-
-                <p>Unique Visitors</p>
+                <h3>{{$totalClass}}</h3>
+                <p>Total Class</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{url('admin/class/list')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-          </div> --}}
-          <!-- ./col -->
+          </div>
+
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>{{$totalSubject}}</h3>
+                <p>Total Subject</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="{{url('admin/subject/list')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+
+
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>{{$totalExam}}</h3>
+                <p>Total Exam</p>
+              </div>
+              <div class="icon">
+                <i class="nav-icon fas fa-table"></i>
+              </div>
+              <a href="{{url('admin/examination/exam-list')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
         </div>
         <!-- /.row -->
         <!-- Main row -->

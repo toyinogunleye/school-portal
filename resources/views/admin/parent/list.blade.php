@@ -142,6 +142,7 @@
                                 <a href="{{url('admin/parent/edit-parent/'.$value->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></a>
                                 <a href="{{url('admin/parent/delete-parent/'.$value->id)}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                  <a href="{{url('admin/parent/my-student/'.$value->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-users"></i></a>
+                                  {{-- <a href="{{url('admin/parent/edit-parent/'.$value->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-caret-down"></i></a> --}}
 
                         </td>
                     </tr>

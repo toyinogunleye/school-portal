@@ -54,6 +54,14 @@ class User extends Authenticatable
         return self::find($id);
     }
 
+    static public function getSingleClass($id)
+    {
+        return self::select('users.*', 'class.amount', 'class.name as class_name')
+            ->join('class', 'class.id', 'users.class_id')
+            ->where('users.id', '=', $id)
+            ->first();
+    }
+
     static public function getTotalUser($user_type)
     {
         return self::select('users.id')
@@ -190,7 +198,7 @@ class User extends Authenticatable
     static public function getCollectFeesStudent()
     {
 
-        $return = self::select('users.*', 'class.name as class_name', 'class.amount as class_amount')
+        $return = self::select('users.*', 'class.name as class_name', 'class.amount as amount')
             ->join('class', 'class.id', '=', 'users.class_id')
             ->where('users.user_type', '=', 3)
             ->where('users.is_delete', '=', 0);
@@ -400,6 +408,11 @@ class User extends Authenticatable
             ->paginate(20);
 
         return $return;
+    }
+
+    static function getPaidAmount($student_id, $class_id)
+    {
+        return StudentAddFeesModel::getPaidAmount($student_id, $class_id);
     }
 
 

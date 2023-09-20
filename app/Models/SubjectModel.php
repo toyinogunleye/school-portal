@@ -56,4 +56,14 @@ class SubjectModel extends Model
             ->get();
         return $return;
     }
+
+    static public function getTotalSubject()
+    {
+        $return = Self::select('subject.id*')
+            ->join('users', 'users.id', 'subject.created_by')
+            ->where('subject.is_delete', '=', 0)
+            ->where('subject.status', '=', 0)
+            ->count();
+        return $return;
+    }
 }

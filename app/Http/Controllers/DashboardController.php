@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClassModel;
+use App\Models\ExamModel;
+use App\Models\StudentAddFeesModel;
+use App\Models\SubjectModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,10 +17,15 @@ class DashboardController extends Controller
         $data['header_title'] = 'Dashboard';
         if (Auth::user()->user_type == 1) {
 
-            $data['TotalAdmin'] = User::getTotalUser(1);
-            $data['TotalTeacher'] = User::getTotalUser(2);
-            $data['TotalStudent'] = User::getTotalUser(3);
-            $data['TotalParent'] = User::getTotalUser(4);
+            $data['getTotalTodayFees'] = StudentAddFeesModel::getTotalTodayFees();
+            $data['getTotalFees'] = StudentAddFeesModel::getTotalFees();
+            $data['totalClass'] = ClassModel::getTotalClass();
+            $data['totalSubject'] = SubjectModel::getTotalSubject();
+            $data['totalExam'] = ExamModel::getTotalExam();
+            $data['totalAdmin'] = User::getTotalUser(1);
+            $data['totalTeacher'] = User::getTotalUser(2);
+            $data['totalStudent'] = User::getTotalUser(3);
+            $data['totalParent'] = User::getTotalUser(4);
 
             return view('admin/dashboard', $data);
         } else if (Auth::user()->user_type == 2) {

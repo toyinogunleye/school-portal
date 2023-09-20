@@ -88,25 +88,44 @@
                       <th>Admission No</th>
                       <th>Student Name</th>
                       <th>Class Name</th>
-                      <th>Total School Fees</th>
+                      <th>Total Fees</th>
                       <th>Paid Amount</th>
+                      <th>Balance</th>
                       <th>Created Date</th>
+                      <th>Updated Date</th>
                        <th>Action</th>
                     </tr>
                   </thead>
-                  @php($i = 1)
+                  @php
+                  $i = 1
+                  @endphp
+
                   <tbody>
 
                     @if(!empty($getRecord))
                         @forelse($getRecord as $value)
+
+                            @php
+                                $paid_amount  = $value->getPaidAmount($value->id, $value->class_id);
+                                $balance = $value->amount - $paid_amount;
+                            @endphp
                             <tr>
                                 <td>{{$i++}}</td>
                                 <td>{{$value->admission_number}}</td>
                                 <td>{{$value->name}} {{$value->middle_name}} {{$value->last_name}}</td>
                                 <td>{{$value->class_name}}</td>
-                                <td>N{{ number_format($value->class_amount, 2) }}</td>
-                                <td>N0.00</td>
+                                <td>N{{ number_format($value->amount, 2) }}</td>
+                                 <td>N{{ number_format($paid_amount, 2) }}</td>
+                                  <td>
+                                     @if($balance > 0)
+                                        <span style="color: red"> N{{number_format( $balance, 2) }}</span>
+                                     @else
+                                         N{{number_format( $value->balance, 2) }}
+
+                                     @endif
+                                </td>
                                 <td>{{date('d-m-Y H:i A', strtotime($value->created_at))}}</td>
+                                 <td>{{date('d-m-Y H:i A', strtotime($value->updated_at))}}</td>
 
                                 <td>
                                     <a href="{{ url('admin/fees-collection/collect-fees/add-fees/'.$value->id) }}" class="btn btn-success btn-sm" style="margin-bottom:10px;" title="Edit" >Collect Fees </a>

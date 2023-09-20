@@ -128,6 +128,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/change-password', [UserController::class, 'changePassword']);
     Route::post('/admin/change-password', [UserController::class, 'updateChangePassword']);
 
+    //SETTING
+    Route::get('/admin/setting', [UserController::class, 'setting']);
+    Route::post('/admin/setting', [UserController::class, 'insertSetting']);
+
     //CLASS Timetable
     Route::get('/admin/class-timetable/list', [ClassTimetableController::class, 'classTimetableList']);
     Route::post('/admin/class-timetable/add', [ClassTimetableController::class, 'insert_update']);
@@ -192,7 +196,8 @@ Route::group(['middleware' => 'admin'], function () {
 
     //Fees Collection
     Route::get('/admin/fees-collection/collect-fees', [FeesCollectionController::class, 'collectFees']);
-    Route::get('/admin/fees-collection/collect-fees/add-fees', [FeesCollectionController::class, 'addCollectFees']);
+    Route::get('/admin/fees-collection/collect-fees/add-fees/{id}', [FeesCollectionController::class, 'addCollectFees']);
+    Route::post('/admin/fees-collection/collect-fees/add-fees/{id}', [FeesCollectionController::class, 'insertCollectFees']);
 });
 
 
@@ -262,6 +267,10 @@ Route::group(['middleware' => 'student'], function () {
 
     //Attendance
     Route::get('/student/my-attendance', [AttendanceController::class, 'myAttendanceStudent']);
+
+    //Fees Payment
+    Route::get('/student/fees-payment', [FeesCollectionController::class, 'collectFeesStudent']);
+    Route::post('/student/fees-payment', [FeesCollectionController::class, 'collectFeesStudentPayment']);
 });
 
 
@@ -283,4 +292,7 @@ Route::group(['middleware' => 'parent'], function () {
     Route::get('/parent/my-student/subject/class-timetable/{class_id}/{subject_id}/{student_id}', [ClassTimetableController::class, 'timetableParent']);
 
     Route::get('/parent/my-student/attendance/{id}', [AttendanceController::class, 'myAttendanceParent']);
+
+    Route::get('/parent/my-student/fees-payment/{student_id}', [FeesCollectionController::class, 'collectFeesStudentParent']);
+    Route::post('/parent/my-student/fees-payment/{student_id}', [FeesCollectionController::class, 'collectFeesStudentPaymentParent']);
 });

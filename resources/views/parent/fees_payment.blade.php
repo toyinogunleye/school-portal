@@ -9,8 +9,9 @@
         <div class="row mb-2">
 
           <div class="col-sm-6">
-            <h1>Collect Fees </h1>
-            <p style="color: blue;">{{ $getStudent->name }} {{ $getStudent->middle_name }} {{ $getStudent->last_name }}</p>
+            <h1>Fees Payment </h1>
+            Student Name: <span style="color: blue";>{{$getStudent->name}} {{$getStudent->middle_name}} {{$getStudent->last_name}}</span>
+
           </div>
 
           <div class="col-sm-6" style="text-align: right;">
@@ -53,7 +54,7 @@
                       <th>Created By</th>
                       <th>Created Date</th>
                       <th>Updated Date</th>
-                       {{-- <th>Action</th> --}}
+                       {{-- <th>Status</th> --}}
                     </tr>
                   </thead>
 
@@ -81,9 +82,14 @@
                             <td>{{ $value->created_fname }} {{ $value->created_mname }} {{ $value->created_lname }}</td>
                             <td>{{ date('d-m-Y h:i A', strtotime($value->created_at)) }}</td>
                             <td>{{ date('d-m-Y h:i A', strtotime($value->updated_at)) }}</td>
-                            <td>
-                                {{-- <a href="{{ url('admin/fees-collection/collect-fees/add-fees/'.$value->id) }}" class="btn btn-success btn-sm" style="margin-bottom:10px;" title="Edit" >Collect Fees </a> --}}
-                            </td>
+                            {{-- <td>
+                                 @if($value->is_payment == 0)
+                                   <span style="color: red"> <b>Pending</b></span>
+                                @else
+                                 <span style="color: green"> <b>Successful</b></span>
+
+                                @endif
+                            </td> --}}
                         </tr>
                     @empty
                         <tr>
@@ -156,8 +162,8 @@
                 <option value="">Select</option>
                 <option value="Transfer">Transfer</option>
                 <option value="Cash">Cash</option>
+                <option value="Online-Payment">Online Payment</option>
                 <option value="Cheque">Cheque</option>
-
             </select>
           </div>
 

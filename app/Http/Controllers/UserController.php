@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClassModel;
+use App\Models\SettingModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,23 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
+    public function setting()
+    {
+        $data['getRecord'] = SettingModel::getSingle();
+        $data['header_title'] = "Setting";
+        return view('admin.setting', $data);
+    }
+
+    public function insertSetting(Request $request)
+    {
+
+        $key = SettingModel::getSingle();
+        $key->authorisation_key = trim($request->authorisation_key);
+        $key->save();
+
+        return redirect()->back()->with('success', 'Key Successfully Updated');
+    }
 
     public function myAccount()
     {
