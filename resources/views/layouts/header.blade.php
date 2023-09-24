@@ -235,6 +235,13 @@
                 </a>
               </li>
 
+              <li class="nav-item">
+                 <a href="{{url('admin/fees-collection/collect-fees-report')}}" class="nav-link @if(Request::segment(3) == 'collect-fees-report') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Collect Fees Report</p>
+                </a>
+              </li>
+
 
 
             </ul>

@@ -31,7 +31,7 @@
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="{{ url('admin/fees-collection/collect-fees') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ url('admin/fees-collection/collect-fees-report?payment_date='.date('Y-m-d'). '') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 
@@ -45,7 +45,7 @@
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="{{ url('admin/fees-collection/collect-fees') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ url('admin/fees-collection/collect-fees-report') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 

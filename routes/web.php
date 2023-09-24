@@ -198,6 +198,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/fees-collection/collect-fees', [FeesCollectionController::class, 'collectFees']);
     Route::get('/admin/fees-collection/collect-fees/add-fees/{id}', [FeesCollectionController::class, 'addCollectFees']);
     Route::post('/admin/fees-collection/collect-fees/add-fees/{id}', [FeesCollectionController::class, 'insertCollectFees']);
+    Route::get('/admin/fees-collection/collect-fees-report', [FeesCollectionController::class, 'collectFeesReport']);
 });
 
 
