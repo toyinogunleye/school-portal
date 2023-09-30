@@ -59,6 +59,23 @@ class AssignClassTeacherModel extends Model
         return $return;
     }
 
+    static function getMyClassSubjectCount($teacher_id)
+    {
+
+        return self::select('assign_class_teacher.id')
+            ->join('class', 'class.id', '=', 'assign_class_teacher.class_id')
+            ->join('class_subject', 'class_subject.class_id', '=', 'class.id')
+            ->join('subject', 'subject.id', '=', 'class_subject.subject_id')
+            ->where('assign_class_teacher.is_delete', '=', 0)
+            ->where('assign_class_teacher.status', '=', 0)
+            ->where('subject.status', '=', 0)
+            ->where('subject.is_delete', '=', 0)
+            ->where('class_subject.status', '=', 0)
+            ->where('class_subject.is_delete', '=', 0)
+            ->where('assign_class_teacher.teacher_id', '=',  $teacher_id)
+            ->count();
+    }
+
     static function getClassSubject($teacher_id)
     {
 
@@ -81,6 +98,18 @@ class AssignClassTeacherModel extends Model
             ->where('class_subject.is_delete', '=', 0)
             ->where('assign_class_teacher.teacher_id', '=',  $teacher_id)
             ->get();
+    }
+
+    static function getMyClassSubjectGroupCount($teacher_id)
+    {
+
+        return self::select('assign_class_teacher.id')
+            ->join('class', 'class.id', '=', 'assign_class_teacher.class_id')
+            ->where('assign_class_teacher.is_delete', '=', 0)
+            ->where('assign_class_teacher.status', '=', 0)
+            ->where('assign_class_teacher.teacher_id', '=',  $teacher_id)
+            // ->groupBy('assign_class_teacher.class_id')
+            ->count();
     }
 
     static function getMyClassSubjectGroup($teacher_id)
@@ -118,6 +147,6 @@ class AssignClassTeacherModel extends Model
     {
         $getWeek = WeekModel::getWeekUsingName(date('l'));
 
-        return ClassSubjectTimetableModel::getRecordClassSubject($class_id, $subject_id, $getWeek->id);
+        return ClassSubjectTimetableModel::getRecordClassSubject($class_id, $subject_id, $getWeek);
     }
 }

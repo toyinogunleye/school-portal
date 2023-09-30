@@ -362,9 +362,6 @@ class User extends Authenticatable
     }
 
 
-
-
-
     static function getTeacherStudent($teacher_id)
     {
         $return = self::select('users.*', 'class.name as class_name')
@@ -410,13 +407,28 @@ class User extends Authenticatable
         return $return;
     }
 
-    static function getPaidAmount($student_id, $class_id)
+    static function getTeacherStudentCount($teacher_id)
     {
-        return StudentAddFeesModel::getPaidAmount($student_id, $class_id);
+        return self::select('users.id')
+            ->join('class', 'class.id', '=', 'users.class_id')
+            ->join('assign_class_teacher', 'assign_class_teacher.class_id', '=', 'class.id')
+            ->where('assign_class_teacher.teacher_id', '=', $teacher_id)
+            ->where('assign_class_teacher.status', '=', 0)
+            ->where('assign_class_teacher.is_delete', '=', 0)
+            ->where('users.user_type', '=', 3)
+            ->where('users.is_delete', '=', 0)
+            // ->orderBy('users.id', 'desc')
+            // ->groupBy('users.id')
+            ->count();
     }
 
 
 
+
+    static function getPaidAmount($student_id, $class_id)
+    {
+        return StudentAddFeesModel::getPaidAmount($student_id, $class_id);
+    }
 
 
 
