@@ -40,7 +40,7 @@
                       <th>Class Name</th>
                       <th>Subject Name</th>
                       <th>Subject Type</th>
-                      <th>Class Timetable</th>
+                      <th>My Class Timetable</th>
                       <th>Created Date</th>
                         <th>Action</th>
 
@@ -55,6 +55,8 @@
                         <td>{{$value->subject_name}}</td>
                         <td>{{$value->subject_type}}</td>
                         <td>
+
+
                             @php
                                 $classSubject =  $value->getMyTimetable($value->class_id, $value->subject_id);
                             @endphp

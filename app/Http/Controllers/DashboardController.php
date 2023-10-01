@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\AssignClassTeacherModel;
 use App\Models\ClassModel;
+use App\Models\ClassSubjectModel;
 use App\Models\ExamModel;
+use App\Models\HomeworkModel;
 use App\Models\NoticeBoardModel;
 use App\Models\StudentAddFeesModel;
 use App\Models\SubjectModel;
+use App\Models\SubmitHomeworkModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +45,25 @@ class DashboardController extends Controller
 
             return view('teacher/dashboard', $data);
         } else if (Auth::user()->user_type == 3) {
+
+            // $data['getTotalTodayFees'] = StudentAddFeesModel::getTotalTodayFees();
+            $data['totalPaidFees'] = StudentAddFeesModel::totalPaidFeesStudent(Auth::user()->id);
+            $data['totalSubject'] = ClassSubjectModel::mySubjectTotal(Auth::user()->class_id);
+            $data['totalNoticeBoard'] = NoticeBoardModel::getRecordUserCount(Auth::user()->user_type);
+            $data['totalHomework'] = HomeworkModel::getRecordStudentCount(Auth::user()->class_id, Auth::user()->id);
+            $data['totalSubmittedHomework'] = SubmitHomeworkModel::getRecordStudentCount(Auth::user()->id);
+
+
+
+            // $data['totalClass'] = ClassModel::getTotalClass();
+
+            // $data['totalExam'] = ExamModel::getTotalExam();
+            // $data['totalAdmin'] = User::getTotalUser(1);
+            // $data['totalTeacher'] = User::getTotalUser(2);
+            // $data['totalStudent'] = User::getTotalUser(3);
+            // $data['totalParent'] = User::getTotalUser(4);
+
+
             return view('student/dashboard', $data);
         } else if (Auth::user()->user_type == 4) {
             return view('parent/dashboard', $data);

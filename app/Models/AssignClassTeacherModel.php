@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request;
+use App\Models\WeekModel;
 
 class AssignClassTeacherModel extends Model
 {
@@ -147,6 +148,6 @@ class AssignClassTeacherModel extends Model
     {
         $getWeek = WeekModel::getWeekUsingName(date('l'));
 
-        return ClassSubjectTimetableModel::getRecordClassSubject($class_id, $subject_id, $getWeek);
+        return ClassSubjectTimetableModel::getRecordClassSubject($class_id, $subject_id, $getWeek->id);
     }
 }

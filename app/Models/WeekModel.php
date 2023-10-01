@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\AssignClassTeacherModel;
 
 class WeekModel extends Model
 {
@@ -22,6 +23,6 @@ class WeekModel extends Model
 
     static public function getWeekUsingName($weekname)
     {
-        return self::where('name', '=', $weekname)->first();
+        return WeekModel::where('name', '=', $weekname)->first();
     }
 }

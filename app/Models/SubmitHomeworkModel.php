@@ -96,6 +96,18 @@ class SubmitHomeworkModel extends Model
         return $return;
     }
 
+    static public function getRecordStudentCount($student_id)
+    {
+        $return = self::select('homework_submit.id')
+            ->join('homework', 'homework.id', '=', 'homework_submit.homework_id')
+            ->join('subject', 'subject.id', '=', 'homework.subject_id')
+            ->join('class', 'class.id', '=', 'homework.class_id')
+            ->where('homework_submit.student_id', '=', $student_id)
+            ->count();
+
+        return $return;
+    }
+
 
     public function getDocument()
     {

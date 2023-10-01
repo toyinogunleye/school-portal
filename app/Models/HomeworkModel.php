@@ -135,6 +135,25 @@ class HomeworkModel extends Model
         return $return;
     }
 
+    static public function getRecordStudentCount($class_id, $student_id)
+    {
+        $return = self::select('homework.id')
+            ->join('subject', 'subject.id', '=', 'homework.subject_id')
+            ->join('class', 'class.id', '=', 'homework.class_id')
+            ->join('users', 'users.id', '=', 'homework.created_by')
+            ->where('homework.class_id', '=', $class_id)
+            ->where('homework.is_delete', '=', 0)
+            ->whereNotIn('homework.id', function ($query) use ($student_id) {
+                $query->select('homework_submit.homework_id')
+                    ->from('homework_submit')
+                    ->where('homework_submit.student_id', '=', $student_id);
+            });
+
+        $return = $return->count();
+        return $return;
+    }
+
+
 
     static public function getSingle($id)
     {
